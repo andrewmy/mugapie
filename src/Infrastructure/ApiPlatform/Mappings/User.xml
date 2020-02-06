@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata
+           https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+    <resource class="App\Domain\Model\User\User">
+        <attribute name="input">App\Application\Dto\User\UserInput</attribute>
+        <attribute name="output">App\Application\Dto\User\UserOutput</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="get"/>
+            <collectionOperation name="post"/>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="get"/>
+            <itemOperation name="put"/>
+            <itemOperation name="delete"/>
+        </itemOperations>
+
+        <property name="id" identifier="true"/>
+        <property name="products">
+            <subresource resourceClass="App\Domain\Model\Product\Product"/>
+        </property>
+        <property name="orders">
+            <subresource resourceClass="App\Domain\Model\Order\Order"/>
+        </property>
+    </resource>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata
+           https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+    <resource class="App\Domain\Model\Product\Product">
+        <attribute name="input">App\Application\Dto\Product\ProductInput</attribute>
+        <attribute name="output">App\Application\Dto\Product\ProductOutput</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="post">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>product:post</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="get"/>
+            <itemOperation name="put">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>product:put</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="delete"/>
+        </itemOperations>
+
+        <property name="id" identifier="true"/>
+    </resource>
+</resources>

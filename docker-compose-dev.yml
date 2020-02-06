@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  php_app:
+    volumes:
+      - default-sync:/var/www/html:nocopy
+
+  nginx:
+    volumes:
+      - default-sync/:/var/www/html:nocopy
+      - ./docker/etc/nginx/conf.d:/etc/nginx/conf.d:ro
+
+volumes:
+  default-sync:
+    external: true

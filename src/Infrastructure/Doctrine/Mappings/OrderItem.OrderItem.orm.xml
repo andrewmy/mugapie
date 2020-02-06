@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity table="order_items"
+            name="App\Domain\Model\OrderItem\OrderItem"
+            change-tracking-policy="DEFERRED_EXPLICIT">
+        <id name="id" type="uuid_binary">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="incrementalId"
+               type="integer"
+               column-definition="INT UNSIGNED AUTO_INCREMENT NOT NULL" />
+        <field name="createdAt" type="datetime"/>
+        <many-to-one field="order"
+                     target-entity="App\Domain\Model\Order\Order"
+                     inversed-by="items">
+            <join-column name="order_id"/>
+        </many-to-one>
+        <many-to-one field="product"
+                     target-entity="App\Domain\Model\Product\Product">
+            <join-column name="product_id"/>
+        </many-to-one>
+        <embedded name="productType"
+                  class="App\Domain\Model\Product\ProductType"
+                  use-column-prefix="false" />
+        <field name="title"/>
+        <field name="sku"/>
+        <embedded name="pricePerUnit" class="Money\Money"/>
+        <field name="units" type="integer">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+
+        <unique-constraints>
+            <unique-constraint columns="incremental_id"/>
+        </unique-constraints>
+    </entity>
+</doctrine-mapping>

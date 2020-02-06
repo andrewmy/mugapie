@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<psalm
+    totallyTyped="false"
+    usePhpDocMethodsWithoutMagicCall="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+    </projectFiles>
+
+    <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="info">
+                <directory name="src/Application/Dto"/>
+            </errorLevel>
+        </MissingConstructor>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="info">
+                <file name="src/Application/Validator/Constraints/UniqueEntityDtoValidator.php"/>
+                <file name="src/Domain/Model/Order/Order.php"/>
+                <file name="src/Domain/Model/Order/ShippingAddress.php"/>
+                <file name="src/Domain/Model/OrderItem/OrderItem.php"/>
+                <file name="src/Domain/Model/Product/Product.php"/>
+                <file name="src/Domain/Model/Transaction/Transaction.php"/>
+                <file name="src/Domain/Model/User/User.php"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <MoreSpecificReturnType>
+            <errorLevel type="info">
+                <file name="src/Infrastructure/Kernel.php"/>
+            </errorLevel>
+        </MoreSpecificReturnType>
+        <UnresolvableInclude>
+            <errorLevel type="info">
+                <file name="src/Infrastructure/Kernel.php"/>
+            </errorLevel>
+        </UnresolvableInclude>
+        <MissingReturnType>
+            <errorLevel type="info">
+                <file name="vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php"/>
+            </errorLevel>
+        </MissingReturnType>
+    </issueHandlers>
+
+</psalm>

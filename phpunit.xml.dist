@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.5/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="tests/bootstrap.php"
+>
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <env force="true" name="KERNEL_CLASS" value="App\Infrastructure\Kernel" />
+        <env force="true" name="APP_ENV" value="test" />
+        <env force="true" name="APP_DEBUG" value="false" />
+        <env force="true" name="APP_SECRET" value="s$cretf0rt3st" />
+        <env force="true" name="SHELL_VERBOSITY" value="-1" />
+
+        <env force="true" name="CORS_ALLOW_ORIGIN" value="^https?://localhost(:[0-9]+)?$"/>
+
+        <env name="DATABASE_URL" value="mysql://mugapie:mugapie@db:3306/mugapie_test" />
+        <env force="true" name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test"/>
+    </php>
+
+    <logging>
+        <log type="coverage-clover" target="var/coverage.xml"/>
+        <log type="coverage-xml" target="var/coverage-xml"/>
+        <log type="junit" target="var/junit.xml" />
+    </logging>
+
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>./src/</directory>
+        </whitelist>
+    </filter>
+
+    <extensions>
+        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
+    </extensions>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
+</phpunit>

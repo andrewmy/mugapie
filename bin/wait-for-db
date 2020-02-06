@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+cmd="$@"
+
+until echo "select 1;" | mysql -h $MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE; do
+  echo "Waiting for DB"
+  sleep 1
+done
+
+>&2 echo "DB is up"
+exec $cmd

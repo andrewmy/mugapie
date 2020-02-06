@@ -1,0 +1,8 @@
+version: '2'
+
+syncs:
+  default-sync:
+    notify_terminal: true
+    src: './'
+    sync_excludes: ['.gitignore', '.git', '.idea', 'var']
+    # sync_userid: '1'

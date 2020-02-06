@@ -1,27 +1,58 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    currency: 'USD'
+    starting_balance: 10000
+    shipping_costs:
+        standard:
+            domestic:
+                mug:
+                    first: 200
+                    next: 100
+                tshirt:
+                    first: 100
+                    next: 50
+            international:
+                mug:
+                    first: 500
+                    next: 250
+                tshirt:
+                    first: 300
+                    next: 150
+        express:
+            domestic:
+                mug:
+                    first: 1000
+                    next: 1000
+                tshirt:
+                    first: 1000
+                    next: 1000
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $currency: "%currency%"
+            $startingBalance: "%starting_balance%"
+            $shippingCosts: "%shipping_costs%"
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    App\Application\:
+        resource: '../src/Application/*'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
+    App\Domain\:
+        resource: '../src/Domain/*'
+
+    App\Infrastructure\:
+        resource: '../src/Infrastructure/*'
+        exclude: '../src/Infrastructure/{Doctrine/Migrations,Kernel.php}'
+
+    App\Ui\:
+        resource: '../src/Ui/*'
+
+    App\Ui\Http\:
+        resource: '../src/Ui/Http/*'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Application\EventSubscriber\DomainEventCollector:
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

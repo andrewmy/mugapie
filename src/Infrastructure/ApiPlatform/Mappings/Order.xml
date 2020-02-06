@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata
+           https://api-platform.com/schema/metadata/metadata-2.0.xsd">
+    <resource class="App\Domain\Model\Order\Order">
+        <attribute name="input">App\Application\Dto\Order\OrderInput</attribute>
+        <attribute name="output">App\Application\Dto\Order\OrderOutput</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="post">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>order:post</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+        <itemOperations>
+            <itemOperation name="get"/>
+            <itemOperation name="put">
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>order:put</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="delete"/>
+            <itemOperation name="send_to_production">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/orders/{id}/send_to_production</attribute>
+                <attribute name="controller">App\Ui\Http\Order\SendToProductionController</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>order:send_to_production</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true"/>
+        <property name="items">
+            <subresource resourceClass="App\Domain\Model\OrderItem\OrderItem"/>
+        </property>
+    </resource>
+</resources>

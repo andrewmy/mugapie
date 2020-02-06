@@ -1,0 +1,27 @@
+api_platform:
+    mapping:
+        paths: ['%kernel.project_dir%/src/Infrastructure/ApiPlatform/Mappings']
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
+    title: 'MugApie'
+    version: '0.0.1'
+    show_webby: false
+    exception_to_status:
+        # defaults
+        Symfony\Component\Serializer\Exception\ExceptionInterface: 400
+        ApiPlatform\Core\Exception\InvalidArgumentException: 400
+        ApiPlatform\Core\Exception\FilterValidationException: 400
+        Doctrine\ORM\OptimisticLockException: 409
+
+        # custom
+        App\Application\Exceptions\OrderOperationFailed: 400
+        App\Domain\Calculator\Exceptions\ShippingCalculationFailed: 400
+        App\Domain\Model\Order\Exceptions\OrderCreationFailed: 400
+        App\Domain\Model\Order\Exceptions\OrderPersistenceFailed: 503
+        App\Domain\Model\OrderItem\Exceptions\OrderItemCreationFailed: 400
+        App\Domain\Model\Product\Exceptions\ProductPersistenceFailed: 503
+        App\Domain\Model\Transaction\Exceptions\TransactionCreationFailed: 400
+        App\Domain\Model\Transaction\Exceptions\TransactionPersistenceFailed: 503
+        App\Domain\Model\User\Exceptions\UserPersistenceFailed: 503

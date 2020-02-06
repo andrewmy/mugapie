@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+
+composer install
+./bin/console doctrine:migrations:migrate -n --allow-no-migration

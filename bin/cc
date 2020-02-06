@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+
+./bin/console cache:clear
+./bin/console cache:warmup

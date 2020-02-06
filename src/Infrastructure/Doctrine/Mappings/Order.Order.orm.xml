@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity table="orders"
+            name="App\Domain\Model\Order\Order"
+            change-tracking-policy="DEFERRED_EXPLICIT">
+        <id name="id" type="uuid_binary">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="incrementalId"
+               type="integer"
+               column-definition="INT UNSIGNED AUTO_INCREMENT NOT NULL" />
+        <field name="createdAt" type="datetime"/>
+        <field name="updatedAt" type="datetime"/>
+        <many-to-one field="user"
+                     target-entity="App\Domain\Model\User\User"
+                     inversed-by="orders">
+            <join-column name="user_id"/>
+        </many-to-one>
+        <embedded name="shippingType"
+                  class="App\Domain\Model\Order\ShippingType"
+                  use-column-prefix="false"/>
+        <embedded name="shippingAddress"
+                  class="App\Domain\Model\Order\ShippingAddress"/>
+        <embedded name="status"
+                  class="App\Domain\Model\Order\OrderStatus"
+                  use-column-prefix="false"/>
+        <embedded name="orderCost" class="Money\Money"/>
+        <one-to-many field="items"
+                     target-entity="App\Domain\Model\OrderItem\OrderItem"
+                     mapped-by="order"
+                     orphan-removal="true">
+            <cascade>
+                <cascade-all></cascade-all>
+            </cascade>
+            <order-by>
+                <order-by-field name="incrementalId"/>
+            </order-by>
+        </one-to-many>
+
+        <unique-constraints>
+            <unique-constraint columns="incremental_id"/>
+        </unique-constraints>
+    </entity>
+</doctrine-mapping>

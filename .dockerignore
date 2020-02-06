@@ -1,0 +1,10 @@
+.git
+*Dockerfile*
+*docker-compose*
+public/bundles/*
+var/*
+phpunit.xml
+.idea
+.env.local
+bin/.phpunit
+.deptrac.cache
