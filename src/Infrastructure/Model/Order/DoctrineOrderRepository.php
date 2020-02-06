@@ -7,6 +7,7 @@ namespace App\Infrastructure\Model\Order;
 use App\Domain\Model\Order\Exceptions\OrderPersistenceFailed;
 use App\Domain\Model\Order\Interfaces\OrderRepository;
 use App\Domain\Model\Order\Order;
+use App\Domain\Model\Order\OrderStatus;
 use App\Domain\Model\Product\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
@@ -36,27 +37,21 @@ final class DoctrineOrderRepository implements OrderRepository
         }
     }
 
-    public function delete(Order $order) : void
-    {
-        try {
-            $this->entityManager->remove($order);
-            $this->entityManager->flush();
-        } catch (ORMException $exception) {
-            throw OrderPersistenceFailed::deleteFailed($exception);
-        }
-    }
-
     /**
      * @return Order[]
      */
-    public function findAllHavingProduct(Product $product) : array
+    public function findAllPendingHavingProduct(Product $product) : array
     {
         return $this->entityManager->createQueryBuilder()
             ->from(Order::class, 'o')
             ->leftJoin('o.items', 'items')
             ->select(['o', 'items'])
             ->where('items.product = :product')
-            ->setParameter('product', $product->id()->value()->getBytes())
+            ->andWhere('o.status.value = :status')
+            ->setParameters([
+                'product' => $product->id()->value()->getBytes(),
+                'status' => OrderStatus::PENDING,
+            ])
             ->getQuery()
             ->getResult();
     }

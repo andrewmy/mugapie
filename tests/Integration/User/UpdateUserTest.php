@@ -18,8 +18,8 @@ final class UpdateUserTest extends IntegrationTestCase
             ['nickname' => 'def'],
         );
 
-        $this->assertResponseIsSuccessful();
-        $this->assertJsonContains([
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains([
             'id' => '99c01751-6d32-464a-9c18-6625856b9192',
             'nickname' => 'def',
             'balance' => 10000,

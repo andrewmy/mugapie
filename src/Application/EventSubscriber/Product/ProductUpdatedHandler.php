@@ -32,6 +32,8 @@ final class ProductUpdatedHandler implements EventSubscriberInterface
 
     /**
      * @return array<string, string>
+     *
+     * @codeCoverageIgnore
      */
     public static function getSubscribedEvents() : array
     {
@@ -41,7 +43,7 @@ final class ProductUpdatedHandler implements EventSubscriberInterface
     public function handle(ProductUpdated $event) : void
     {
         $product = $event->product();
-        $orders  = $this->orderRepository->findAllHavingProduct($product);
+        $orders  = $this->orderRepository->findAllPendingHavingProduct($product);
         foreach ($orders as $order) {
             $oldItem = $order->items()->filter(
                 static function (OrderItem $item) use ($product) : bool {

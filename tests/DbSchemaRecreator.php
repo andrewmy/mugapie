@@ -7,7 +7,7 @@ namespace App\Tests;
 use function passthru;
 use function sprintf;
 
-trait DbSchemaRecreator
+final class DbSchemaRecreator
 {
     public static function dropDatabase() : void
     {

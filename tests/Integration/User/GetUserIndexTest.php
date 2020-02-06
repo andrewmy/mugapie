@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Integration\User;
 
 use App\Tests\Integration\IntegrationTestCase;
+use function assert;
 use function json_decode;
 use const JSON_THROW_ON_ERROR;
 
@@ -19,12 +20,9 @@ final class GetUserIndexTest extends IntegrationTestCase
             'users',
         );
 
-        $data = json_decode(
-            $client->getResponse()->getContent(),
-            true,
-            512,
-            JSON_THROW_ON_ERROR
-        );
+        $response = $client->getResponse();
+        assert($response !== null);
+        $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
         self::assertCount(1, $data);
         self::assertArraySubset([

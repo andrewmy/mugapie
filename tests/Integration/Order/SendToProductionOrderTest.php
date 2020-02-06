@@ -9,7 +9,7 @@ use App\Tests\Integration\IntegrationTestCase;
 
 class SendToProductionOrderTest extends IntegrationTestCase
 {
-    public function testSend() : void
+    public function testSendSuccess() : void
     {
         $user    = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
         $product = $this->createProduct($user, 'f032d950-9c3e-4336-b133-74afd5bb31e5');
@@ -24,8 +24,8 @@ class SendToProductionOrderTest extends IntegrationTestCase
             'orders/4c898b2c-d38e-4b7b-89cf-ee301ddb6942/send_to_production',
         );
 
-        $this->assertResponseIsSuccessful();
-        $this->assertJsonContains([
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains([
             'shippingType' => 'standard',
             'countryCode' => 'LV',
             'region' => '-',
@@ -55,6 +55,45 @@ class SendToProductionOrderTest extends IntegrationTestCase
             ],
         ]);
 
-        $this->assertResponseStatusCodeSame(400);
+        self::assertResponseStatusCodeSame(400);
+        self::assertJsonContains(['detail' => 'Order is not editable']);
+
+        $this->request(
+            'POST',
+            'orders/4c898b2c-d38e-4b7b-89cf-ee301ddb6942/send_to_production',
+        );
+
+        self::assertResponseStatusCodeSame(400);
+        self::assertJsonContains(['detail' => 'Order is not editable']);
+    }
+
+    public function testSendTooExpensiveFails() : void
+    {
+        $user    = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
+        $product = $this->createProduct($user, 'f032d950-9c3e-4336-b133-74afd5bb31e5');
+        $this->createOrder(
+            $user,
+            '4c898b2c-d38e-4b7b-89cf-ee301ddb6942',
+            [new CreateOrderItem($product, 1)],
+        );
+
+        $this->request(
+            'PUT',
+            'products/f032d950-9c3e-4336-b133-74afd5bb31e5',
+            [
+                'type' => 'mug',
+                'title' => 'Abc!',
+                'sku' => 'abcd',
+                'cost' => 12345,
+            ],
+        );
+
+        $this->request(
+            'POST',
+            'orders/4c898b2c-d38e-4b7b-89cf-ee301ddb6942/send_to_production',
+        );
+
+        self::assertResponseStatusCodeSame(400);
+        self::assertJsonContains(['detail' => 'Cannot proceed with order, its cost of USD 128.45 exceeds the available balance of USD 100.00']);
     }
 }

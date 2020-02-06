@@ -13,7 +13,7 @@ use App\Domain\Model\User\User;
 use Money\Currency;
 use Money\Money;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints;
 use function assert;
 
 /**
@@ -33,15 +33,15 @@ final class ProductInput
 
     /**
      * @var User
-     * @Assert\NotNull(groups={"post"})
+     * @Constraints\NotNull(groups={"post"})
      * @Groups({"product:post"})
      */
     public ?User $user = null;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post", "put"})
-     * @Assert\Choice(
+     * @Constraints\NotBlank(groups={"post", "put"})
+     * @Constraints\Choice(
      *     callback={"App\Domain\Model\Product\ProductType", "validValues"},
      *     groups={"post", "put"}
      * )
@@ -51,21 +51,21 @@ final class ProductInput
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post", "put"})
+     * @Constraints\NotBlank(groups={"post", "put"})
      * @Groups({"product:post", "product:put"})
      */
     public string $title;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post", "put"})
+     * @Constraints\NotBlank(groups={"post", "put"})
      * @Groups({"product:post", "product:put"})
      */
     public string $sku = '';
 
     /**
      * @var int
-     * @Assert\NotBlank(groups={"post", "put"})
+     * @Constraints\NotBlank(groups={"post", "put"})
      * @Groups({"product:post", "product:put"})
      */
     public int $cost = 0;

@@ -16,12 +16,7 @@ interface OrderRepository
     public function save(Order $order) : void;
 
     /**
-     * @throws OrderPersistenceFailed
-     */
-    public function delete(Order $order) : void;
-
-    /**
      * @return Order[]
      */
-    public function findAllHavingProduct(Product $product) : array;
+    public function findAllPendingHavingProduct(Product $product) : array;
 }

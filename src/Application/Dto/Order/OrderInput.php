@@ -11,7 +11,7 @@ use App\Domain\Model\Order\ShippingAddress;
 use App\Domain\Model\Order\ShippingType;
 use App\Domain\Model\User\User;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints;
 use ZipCodeValidator\Constraints\ZipCode;
 use function assert;
 
@@ -19,19 +19,19 @@ final class OrderInput
 {
     /**
      * @var User
-     * @Assert\NotNull(groups={"post"})
+     * @Constraints\NotNull(groups={"post"})
      * @Groups({"order:post"})
      */
     public ?User $user = null;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
-     * @Assert\Choice(
+     * @Constraints\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
+     * @Constraints\Choice(
      *     callback={"App\Domain\Model\Order\ShippingType", "validValues"},
      *     groups={"post_home", "put_home"}
      * )
-     * @Assert\EqualTo(
+     * @Constraints\EqualTo(
      *     value=App\Domain\Model\Order\ShippingType::STANDARD,
      *     groups={"post_world", "put_world"}
      * )
@@ -41,16 +41,16 @@ final class OrderInput
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
-     * @Assert\Country(groups={"post_home", "put_home", "post_world", "put_world"})
+     * @Constraints\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
+     * @Constraints\Country(groups={"post_home", "put_home", "post_world", "put_world"})
      * @Groups({"order:post", "order:put"})
      */
     public string $countryCode;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_home", "put_home"})
-     * @Assert\Choice(
+     * @Constraints\NotBlank(groups={"post_home", "put_home"})
+     * @Constraints\Choice(
      *     choices=App\Domain\Model\Order\ShippingAddress::DOMESTIC_REGIONS,
      *     groups={"post_home", "put_home"}
      * )
@@ -60,28 +60,28 @@ final class OrderInput
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
+     * @Constraints\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
      * @Groups({"order:post", "order:put"})
      */
     public string $city;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_home", "put_home"})
+     * @Constraints\NotBlank(groups={"post_home", "put_home"})
      * @Groups({"order:post", "order:put"})
      */
     public string $street;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_world", "put_world"})
+     * @Constraints\NotBlank(groups={"post_world", "put_world"})
      * @Groups({"order:post", "order:put"})
      */
     public string $address;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_home", "put_home"})
+     * @Constraints\NotBlank(groups={"post_home", "put_home"})
      * @ZipCode(
      *     getter="countryCode",
      *     strict=false,
@@ -94,25 +94,25 @@ final class OrderInput
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
+     * @Constraints\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
      * @Groups({"order:post", "order:put"})
      */
     public string $phone;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
+     * @Constraints\NotBlank(groups={"post_home", "put_home", "post_world", "put_world"})
      * @Groups({"order:post", "order:put"})
      */
     public string $fullName;
 
     /**
      * @var OrderItemInput[]
-     * @Assert\Count(
+     * @Constraints\Count(
      *     min=1,
      *     groups={"post_home", "put_home", "post_world", "put_world"}
      * )
-     * @Assert\Valid(
+     * @Constraints\Valid(
      *     groups={"post_home", "put_home", "post_world", "put_world"}
      * )
      * @Groups({"order:post", "order:put"})

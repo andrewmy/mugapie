@@ -34,6 +34,9 @@ use function json_encode;
 
 abstract class IntegrationTestCase extends ApiTestCase
 {
+    /**
+     * @param array<mixed> $data
+     */
     protected function request(
         string $method,
         string $endpoint,

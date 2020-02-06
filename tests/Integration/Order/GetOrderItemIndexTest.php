@@ -6,6 +6,7 @@ namespace App\Tests\Integration\Order;
 
 use App\Domain\Model\OrderItem\Dto\CreateOrderItem;
 use App\Tests\Integration\IntegrationTestCase;
+use function assert;
 use function json_decode;
 use const JSON_THROW_ON_ERROR;
 
@@ -26,12 +27,9 @@ class GetOrderItemIndexTest extends IntegrationTestCase
             'orders/4c898b2c-d38e-4b7b-89cf-ee301ddb6942/items',
         );
 
-        $data = json_decode(
-            $client->getResponse()->getContent(),
-            true,
-            512,
-            JSON_THROW_ON_ERROR
-        );
+        $response = $client->getResponse();
+        assert($response !== null);
+        $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
         self::assertCount(1, $data);
         self::assertArraySubset([

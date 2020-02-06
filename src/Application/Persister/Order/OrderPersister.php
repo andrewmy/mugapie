@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Application\Persister\Order;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
+use App\Application\Exceptions\OrderOperationFailed;
+use App\Domain\Model\Order\Exceptions\OrderPersistenceFailed;
 use App\Domain\Model\Order\Interfaces\OrderRepository;
 use App\Domain\Model\Order\Order;
 use function assert;
@@ -34,7 +36,11 @@ final class OrderPersister implements DataPersisterInterface
     {
         assert($data instanceof Order);
 
-        $this->orderRepository->save($data);
+        try {
+            $this->orderRepository->save($data);
+        } catch (OrderPersistenceFailed $exception) {
+            throw OrderOperationFailed::wrap($exception);
+        }
 
         return $data;
     }
@@ -44,8 +50,6 @@ final class OrderPersister implements DataPersisterInterface
      */
     public function remove($data) : void
     {
-        assert($data instanceof Order);
-
-        $this->orderRepository->delete($data);
+        // nothing happens here
     }
 }

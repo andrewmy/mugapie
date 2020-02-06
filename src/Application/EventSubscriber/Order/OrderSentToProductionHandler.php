@@ -25,6 +25,8 @@ final class OrderSentToProductionHandler implements EventSubscriberInterface
 
     /**
      * @return array<string, string>
+     *
+     * @codeCoverageIgnore
      */
     public static function getSubscribedEvents() : array
     {
@@ -34,8 +36,8 @@ final class OrderSentToProductionHandler implements EventSubscriberInterface
     public function handle(OrderSentToProduction $event) : void
     {
         $this->transactionRepository->save(
-            $this->transactionFactory->createForUser(
-                $event->order()->user(),
+            $this->transactionFactory->createForOrder(
+                $event->order(),
                 $event->order()->orderCost()->negative(),
             ),
         );

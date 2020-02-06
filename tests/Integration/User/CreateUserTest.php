@@ -12,7 +12,7 @@ final class CreateUserTest extends IntegrationTestCase
     {
         $this->request('POST', 'users', ['nickname' => 'abc']);
 
-        $this->assertResponseIsSuccessful();
-        $this->assertJsonContains(['nickname' => 'abc', 'balance' => 10000]);
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains(['nickname' => 'abc', 'balance' => 10000]);
     }
 }

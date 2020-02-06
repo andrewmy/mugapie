@@ -1,15 +1,17 @@
 includes:
-    - %currentWorkingDirectory%/vendor/phpstan/phpstan-doctrine/extension.neon
-    - %currentWorkingDirectory%/vendor/phpstan/phpstan-deprecation-rules/rules.neon
-    - %currentWorkingDirectory%/vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-mockery/extension.neon
 
 parameters:
     level: max
     paths:
         - src
+        - tests
     excludes_analyse:
         - src/Infrastructure/Doctrine/Migrations
-    tmpDir: %currentWorkingDirectory%/var/phpstan
+    tmpDir: var/phpstan
     ignoreErrors:
         -
             message: '~Variable property access on mixed.~'

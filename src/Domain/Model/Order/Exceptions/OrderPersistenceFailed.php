@@ -22,12 +22,4 @@ final class OrderPersistenceFailed extends RuntimeException
             $previous,
         );
     }
-
-    public static function deleteFailed(Throwable $previous) : self
-    {
-        return new self(
-            sprintf('Order delete failed: %s', $previous->getMessage()),
-            $previous,
-        );
-    }
 }

@@ -35,6 +35,8 @@ final class UserCreatedHandler implements EventSubscriberInterface
 
     /**
      * @return array<string, string>
+     *
+     * @codeCoverageIgnore
      */
     public static function getSubscribedEvents() : array
     {

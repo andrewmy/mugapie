@@ -18,8 +18,8 @@ final class GetProductTest extends IntegrationTestCase
             'products/f032d950-9c3e-4336-b133-74afd5bb31e5',
         );
 
-        $this->assertResponseIsSuccessful();
-        $this->assertJsonContains([
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains([
             'id' => 'f032d950-9c3e-4336-b133-74afd5bb31e5',
             'type' => 'mug',
             'title' => 'prod abc',

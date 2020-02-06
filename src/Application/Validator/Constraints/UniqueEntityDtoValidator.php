@@ -10,10 +10,8 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use function assert;
 use function class_exists;
 use function count;
-use function is_object;
 use function property_exists;
 use function sprintf;
 
@@ -59,11 +57,6 @@ final class UniqueEntityDtoValidator extends ConstraintValidator
         }
 
         $reference = $dto->{$constraint->referenceEntityField};
-        if ($reference === null) {
-            return;
-        }
-
-        assert(is_object($reference));
 
         $classMeta = $this->entityManager->getClassMetadata($constraint->entityClass);
 

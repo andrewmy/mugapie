@@ -24,8 +24,8 @@ class GetOrderTest extends IntegrationTestCase
             'orders/4c898b2c-d38e-4b7b-89cf-ee301ddb6942',
         );
 
-        $this->assertResponseIsSuccessful();
-        $this->assertJsonContains([
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains([
             'id' => '4c898b2c-d38e-4b7b-89cf-ee301ddb6942',
             'orderCost' => 4321,
             'status' => 'pending',

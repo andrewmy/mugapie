@@ -8,16 +8,17 @@
 >
     <projectFiles>
         <directory name="src"/>
+        <directory name="tests"/>
     </projectFiles>
 
     <issueHandlers>
         <MissingConstructor>
-            <errorLevel type="info">
+            <errorLevel type="suppress">
                 <directory name="src/Application/Dto"/>
             </errorLevel>
         </MissingConstructor>
         <PropertyNotSetInConstructor>
-            <errorLevel type="info">
+            <errorLevel type="suppress">
                 <file name="src/Application/Validator/Constraints/UniqueEntityDtoValidator.php"/>
                 <file name="src/Domain/Model/Order/Order.php"/>
                 <file name="src/Domain/Model/Order/ShippingAddress.php"/>
@@ -25,23 +26,32 @@
                 <file name="src/Domain/Model/Product/Product.php"/>
                 <file name="src/Domain/Model/Transaction/Transaction.php"/>
                 <file name="src/Domain/Model/User/User.php"/>
+                <directory name="tests"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
         <MoreSpecificReturnType>
-            <errorLevel type="info">
+            <errorLevel type="suppress">
                 <file name="src/Infrastructure/Kernel.php"/>
             </errorLevel>
         </MoreSpecificReturnType>
         <UnresolvableInclude>
-            <errorLevel type="info">
+            <errorLevel type="suppress">
                 <file name="src/Infrastructure/Kernel.php"/>
             </errorLevel>
         </UnresolvableInclude>
         <MissingReturnType>
-            <errorLevel type="info">
+            <errorLevel type="suppress">
                 <file name="vendor/symfony/framework-bundle/Kernel/MicroKernelTrait.php"/>
             </errorLevel>
         </MissingReturnType>
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </InternalMethod>
     </issueHandlers>
 
+    <plugins>
+        <pluginClass class="Psalm\MockeryPlugin\Plugin"/>
+    </plugins>
 </psalm>

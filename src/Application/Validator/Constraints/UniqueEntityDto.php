@@ -24,6 +24,9 @@ final class UniqueEntityDto extends Constraint
         return UniqueEntityDtoValidator::class;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getTargets() : string
     {
         return self::CLASS_CONSTRAINT;
@@ -31,6 +34,8 @@ final class UniqueEntityDto extends Constraint
 
     /**
      * @return string[]
+     *
+     * @codeCoverageIgnore
      */
     public function getRequiredOptions() : array
     {

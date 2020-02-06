@@ -17,8 +17,8 @@ final class GetUserTest extends IntegrationTestCase
             'users/99c01751-6d32-464a-9c18-6625856b9192',
         );
 
-        $this->assertResponseIsSuccessful();
-        $this->assertJsonContains([
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains([
             'id' => '99c01751-6d32-464a-9c18-6625856b9192',
             'nickname' => 'abc',
             'balance' => 10000,

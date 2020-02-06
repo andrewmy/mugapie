@@ -10,7 +10,7 @@ final class CreateProductTest extends IntegrationTestCase
 {
     public function testCreate() : void
     {
-        $user = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
+        $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
 
         $this->request('POST', 'products', [
             'user' => '/api/users/99c01751-6d32-464a-9c18-6625856b9192',
@@ -20,12 +20,23 @@ final class CreateProductTest extends IntegrationTestCase
             'cost' => 1234,
         ]);
 
-        $this->assertResponseIsSuccessful();
-        $this->assertJsonContains([
+        self::assertResponseIsSuccessful();
+        self::assertJsonContains([
             'type' => 'mug',
             'title' => 'Abc',
             'sku' => 'abc',
             'cost' => 1234,
         ]);
+
+        $this->request('POST', 'products', [
+            'user' => '/api/users/99c01751-6d32-464a-9c18-6625856b9192',
+            'type' => 'mug',
+            'title' => 'Abc',
+            'sku' => 'abc',
+            'cost' => 1234,
+        ]);
+
+        self::assertResponseStatusCodeSame(400);
+        self::assertJsonContains(['detail' => 'sku: This value is already used.']);
     }
 }

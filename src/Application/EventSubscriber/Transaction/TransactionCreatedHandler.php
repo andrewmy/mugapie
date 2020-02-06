@@ -19,6 +19,8 @@ final class TransactionCreatedHandler implements EventSubscriberInterface
 
     /**
      * @return array<string, string>
+     *
+     * @codeCoverageIgnore
      */
     public static function getSubscribedEvents() : array
     {
