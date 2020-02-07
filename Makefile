@@ -7,7 +7,7 @@ composer-validate:
 	composer validate
 
 require-check:
-	php -dmemory_limit=4G vendor/bin/composer-require-checker check composer.json
+	php -dmemory_limit=4G vendor/bin/composer-require-checker --config-file=require-checker.json check composer.json
 
 unused-check:
 	php -dmemory_limit=4G vendor/bin/unused_scanner
