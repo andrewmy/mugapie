@@ -1,0 +1,13 @@
+on: [push, pull_request]
+name: CI
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Build and run Docker env
+        run: docker-compose up --build -d
+
+      - name: Run tests
+        run: sleep 10 && docker-compose exec php_app make ci
