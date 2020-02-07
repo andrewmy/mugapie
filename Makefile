@@ -34,7 +34,7 @@ phpunit-xml:
 	[ -f phpunit.xml ] || cp phpunit.xml.dist phpunit.xml
 
 mutate: test phpunit-xml
-	phpdbg -qrr vendor/bin/infection run --verbose --show-mutations --no-interaction --only-covered --coverage var --min-msi=88 --min-covered-msi=88 -j2
+	phpdbg -qrr vendor/bin/infection run --verbose --show-mutations --no-interaction --only-covered --coverage var --min-msi=85 --min-covered-msi=85 -j2
 
 clean:
 	rm -rf var/
