@@ -42,6 +42,11 @@ All the endpoints are available without authentication, yolo.
 - `GET /api/users/{id}`
 - `DELETE /api/users/{id}`
 
+Some dummy data to play around:
+`docker-compose exec php_app bin/console doctrine:fixtures:load -n`
+
+There's also a Postman collection in the box.
+
 ## Typical usage flow
 
 - Create a user;

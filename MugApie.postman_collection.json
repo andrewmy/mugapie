@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "a8ddd2b5-e2fb-40fe-9be2-8048e11f79e2",
+		"name": "MugAPIe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get user index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/users?page=1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nickname\": \"abcd\"\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}/users",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nickname\": \"def\"\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}/users/3317c4f4-e9c7-4e62-9a29-709c4af020d5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"users",
+								"3317c4f4-e9c7-4e62-9a29-709c4af020d5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/users/18ee6857-47dc-4df9-8a65-6dd40cdac79c",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"users",
+								"18ee6857-47dc-4df9-8a65-6dd40cdac79c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/users/21fc70ed-30b9-496d-be2f-eaf6b5e6fda9",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"users",
+								"21fc70ed-30b9-496d-be2f-eaf6b5e6fda9"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": \"/api/users/18ee6857-47dc-4df9-8a65-6dd40cdac79c\",\n\t\"type\": \"mug\",\n\t\"title\": \"Abc\",\n\t\"sku\": \"abc\",\n\t\"cost\": 1234\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}/products",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"type\": \"mug\",\n\t\"title\": \"AbC\",\n\t\"sku\": \"abc\",\n\t\"cost\": 1534\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}/products/4c898b2c-d38e-4b7b-89cf-ee301ddb6942",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products",
+								"4c898b2c-d38e-4b7b-89cf-ee301ddb6942"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View product",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/products/4c898b2c-d38e-4b7b-89cf-ee301ddb6942",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products",
+								"4c898b2c-d38e-4b7b-89cf-ee301ddb6942"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/products/5995ed5a-d40f-4b46-8213-cc0baf2711c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products",
+								"5995ed5a-d40f-4b46-8213-cc0baf2711c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user's product index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/users/18ee6857-47dc-4df9-8a65-6dd40cdac79c/products?page=1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"users",
+								"18ee6857-47dc-4df9-8a65-6dd40cdac79c",
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user's order index",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/users/18ee6857-47dc-4df9-8a65-6dd40cdac79c/orders?page=1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"users",
+								"18ee6857-47dc-4df9-8a65-6dd40cdac79c",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": \"/api/users/18ee6857-47dc-4df9-8a65-6dd40cdac79c\",\n\t\"shippingType\": \"standard\",\n\t\"countryCode\": \"LV\",\n\t\"region\": \"Riga\",\n\t\"city\": \"Riga\",\n\t\"address\": \"Z1\",\n\t\"zip\": \"LV-1001\",\n\t\"phone\": \"123\",\n\t\"fullName\": \"A Bc\",\n\t\"items\": [\n\t\t{\n\t\t\t\"product\": \"/api/products/4c898b2c-d38e-4b7b-89cf-ee301ddb6942\",\n\t\t\t\"units\": 3\n\t\t}\n\t]\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}/orders",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"shippingType\": \"standard\",\n\t\"countryCode\": \"LV\",\n\t\"region\": \"Riga\",\n\t\"city\": \"Riga\",\n\t\"address\": \"Z1\",\n\t\"zip\": \"LV-1001\",\n\t\"phone\": \"123\",\n\t\"fullName\": \"A Bc\",\n\t\"items\": [\n\t\t{\n\t\t\t\"product\": \"/api/products/4c898b2c-d38e-4b7b-89cf-ee301ddb6942\",\n\t\t\t\"units\": 4\n\t\t}\n\t]\n}"
+						},
+						"url": {
+							"raw": "{{api_url}}/orders/440f3ec7-5cad-4ea4-ab47-9ec0710a4e9f",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"orders",
+								"440f3ec7-5cad-4ea4-ab47-9ec0710a4e9f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View order",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_url}}/orders/440f3ec7-5cad-4ea4-ab47-9ec0710a4e9f",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"orders",
+								"440f3ec7-5cad-4ea4-ab47-9ec0710a4e9f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get order item index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_url}}/orders/440f3ec7-5cad-4ea4-ab47-9ec0710a4e9f/items?page=1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"orders",
+								"440f3ec7-5cad-4ea4-ab47-9ec0710a4e9f",
+								"items"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send order to production",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{api_url}}/orders/440f3ec7-5cad-4ea4-ab47-9ec0710a4e9f/send_to_production",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"orders",
+								"440f3ec7-5cad-4ea4-ab47-9ec0710a4e9f",
+								"send_to_production"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get OpenAPI docs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/docs.json",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"docs.json"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "877719e3-a636-417e-b1a3-2225470dac97",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "baa91407-a48b-428f-9ffa-d67b29fd816d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "1027cc6b-6f7b-41bb-a6ee-45f86e82e0cd",
+			"key": "api_url",
+			"value": "http://127.0.0.1:1080/api",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

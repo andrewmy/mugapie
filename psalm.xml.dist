@@ -26,6 +26,7 @@
                 <file name="src/Domain/Model/Product/Product.php"/>
                 <file name="src/Domain/Model/Transaction/Transaction.php"/>
                 <file name="src/Domain/Model/User/User.php"/>
+                <directory name="src/Infrastructure/Doctrine/DataFixtures"/>
                 <directory name="tests"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
