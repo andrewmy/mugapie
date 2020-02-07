@@ -29,6 +29,9 @@ final class ProductFixture extends Fixture implements DependentFixtureInterface
         $this->currency = new Currency($currency);
     }
 
+    /**
+     * @return array<class-string>
+     */
     public function getDependencies() : array
     {
         return [UserFixture::class];
