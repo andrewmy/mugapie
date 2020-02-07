@@ -1,13 +1,10 @@
-ci: composer-validate composer-install cbf cs require-check unused-check security-check test stan mutate deptrac
+ci: composer-validate cbf cs require-check unused-check security-check test stan mutate deptrac
 
 deptrac:
 	php vendor/bin/deptrac
 
 composer-validate:
 	composer validate
-
-composer-install:
-	composer install
 
 require-check:
 	php vendor/bin/composer-require-checker check composer.json
