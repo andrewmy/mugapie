@@ -60,8 +60,7 @@ There's also a Postman collection in the box.
 ## Testing and quality
 
 - Testing: `docker-compose exec php_app make test`
-- Static analysis (PHPStan): `docker-compose exec php_app make phpstan`
-- Static analysis (Psalm): `docker-compose exec php_app make psalm`
+- Static analysis (PHPStan + Psalm): `docker-compose exec php_app make stan`
 - All the things: `docker-compose exec php_app make ci`
 
 ## Going live
