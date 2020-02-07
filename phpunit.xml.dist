@@ -17,7 +17,7 @@
 
         <env force="true" name="CORS_ALLOW_ORIGIN" value="^https?://localhost(:[0-9]+)?$"/>
 
-        <env name="DATABASE_URL" value="mysql://mugapie:mugapie@db:3306/mugapie_test" />
+        <env force="true" name="DATABASE_URL" value="mysql://mugapie:mugapie@db:3306/mugapie_test?serverVersion=8.0" />
         <env force="true" name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test"/>
     </php>
 

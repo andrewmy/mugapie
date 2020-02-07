@@ -9,6 +9,7 @@ use App\Domain\Model\Transaction\Interfaces\TransactionRepository;
 use App\Domain\Model\User\Events\UserCreated;
 use Money\Currency;
 use Money\Money;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 final class UserCreatedHandler implements EventSubscriberInterface
@@ -17,6 +18,8 @@ final class UserCreatedHandler implements EventSubscriberInterface
 
     private TransactionFactory $transactionFactory;
 
+    private LoggerInterface $logger;
+
     private string $currency;
 
     private int $startingBalance;
@@ -24,11 +27,13 @@ final class UserCreatedHandler implements EventSubscriberInterface
     public function __construct(
         TransactionRepository $transactionRepository,
         TransactionFactory $transactionFactory,
+        LoggerInterface $logger,
         string $currency,
         int $startingBalance
     ) {
         $this->transactionRepository = $transactionRepository;
         $this->transactionFactory    = $transactionFactory;
+        $this->logger                = $logger;
         $this->currency              = $currency;
         $this->startingBalance       = $startingBalance;
     }
@@ -45,11 +50,16 @@ final class UserCreatedHandler implements EventSubscriberInterface
 
     public function handle(UserCreated $event) : void
     {
-        $this->transactionRepository->save(
-            $this->transactionFactory->createForUser(
-                $event->user(),
-                new Money($this->startingBalance, new Currency($this->currency)),
-            ),
+        $transaction = $this->transactionFactory->createForUser(
+            $event->user(),
+            new Money($this->startingBalance, new Currency($this->currency)),
         );
+        $this->transactionRepository->save($transaction);
+
+        $this->logger->info('New transaction', [
+            'transaction_id' => (string) $transaction->id(),
+            'user_id' => (string) $event->user()->id(),
+            'amount' => $transaction->amount(),
+        ]);
     }
 }

@@ -10,6 +10,7 @@ use App\Domain\Model\OrderItem\Dto\CreateOrderItem;
 use App\Domain\Model\OrderItem\Interfaces\OrderItemFactory;
 use App\Domain\Model\OrderItem\OrderItem;
 use App\Domain\Model\Product\Events\ProductUpdated;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 final class ProductUpdatedHandler implements EventSubscriberInterface
@@ -20,14 +21,18 @@ final class ProductUpdatedHandler implements EventSubscriberInterface
 
     private OrderItemFactory $orderItemFactory;
 
+    private LoggerInterface $logger;
+
     public function __construct(
         OrderRepository $orderRepository,
         OrderCostCalculator $orderCostCalculator,
-        OrderItemFactory $orderItemFactory
+        OrderItemFactory $orderItemFactory,
+        LoggerInterface $logger
     ) {
         $this->orderRepository     = $orderRepository;
         $this->orderCostCalculator = $orderCostCalculator;
         $this->orderItemFactory    = $orderItemFactory;
+        $this->logger              = $logger;
     }
 
     /**
@@ -70,6 +75,11 @@ final class ProductUpdatedHandler implements EventSubscriberInterface
             );
 
             $this->orderRepository->save($order);
+
+            $this->logger->info('Updated order cost', [
+                'order_id' => (string) $order->id(),
+                'cost' => $order->orderCost(),
+            ]);
         }
     }
 }

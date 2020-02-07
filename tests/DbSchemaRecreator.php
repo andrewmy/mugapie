@@ -22,11 +22,11 @@ final class DbSchemaRecreator
         self::dropDatabase();
 
         passthru(sprintf(
-            'APP_ENV=test php "%s/../bin/console" doctrine:query:sql "DROP TABLE IF EXISTS migration_versions" -n',
+            'php "%s/../bin/console" doctrine:query:sql "DROP TABLE IF EXISTS migration_versions" -n --env=test',
             __DIR__
         ));
         passthru(sprintf(
-            'APP_ENV=test php "%s/../bin/console" doctrine:migrations:migrate -n',
+            'php "%s/../bin/console" doctrine:migrations:migrate -n --env=test',
             __DIR__
         ));
     }

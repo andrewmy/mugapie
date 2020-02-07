@@ -28,7 +28,7 @@ stan:
 	php vendor/bin/phpstan analyse && php vendor/bin/psalm --show-info=false
 
 test:
-	phpdbg -qrr -dmemory_limit=-1 vendor/bin/phpunit --stop-on-failure && vendor/bin/coverage-check var/coverage.xml 91
+	phpdbg -qrr -dmemory_limit=-1 vendor/bin/phpunit --stop-on-failure && vendor/bin/coverage-check var/coverage.xml 92
 
 phpunit-xml:
 	[ -f phpunit.xml ] || cp phpunit.xml.dist phpunit.xml

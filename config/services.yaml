@@ -1,4 +1,6 @@
 parameters:
+    default_log_path: "%kernel.logs_dir%/%kernel.environment%.log"
+    log_path: "%env(string:default:default_log_path:LOG_DESTINATION)%"
     currency: 'USD'
     starting_balance: 10000
     shipping_costs:

@@ -6,15 +6,21 @@ namespace App\Application\EventSubscriber\Transaction;
 
 use App\Domain\Model\Transaction\Events\TransactionCreated;
 use App\Domain\Model\User\Interfaces\UserRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 final class TransactionCreatedHandler implements EventSubscriberInterface
 {
     private UserRepository $userRepository;
 
-    public function __construct(UserRepository $userRepository)
-    {
+    private LoggerInterface $logger;
+
+    public function __construct(
+        UserRepository $userRepository,
+        LoggerInterface $logger
+    ) {
         $this->userRepository = $userRepository;
+        $this->logger         = $logger;
     }
 
     /**
@@ -35,5 +41,10 @@ final class TransactionCreatedHandler implements EventSubscriberInterface
         $user->adjustBalanceByAmount((int) $transaction->amount()->getAmount());
 
         $this->userRepository->save($user);
+
+        $this->logger->info('Updated user balance', [
+            'user_id' => (string) $user->id(),
+            'balance' => $user->balance(),
+        ]);
     }
 }
