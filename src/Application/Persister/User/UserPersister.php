@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace App\Application\Persister\User;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
+use App\Application\Exceptions\UserOperationFailed;
+use App\Application\Interfaces\TransactionalExecutor;
+use App\Domain\Model\Transaction\Exceptions\TransactionPersistenceFailed;
+use App\Domain\Model\User\Exceptions\UserPersistenceFailed;
 use App\Domain\Model\User\Interfaces\UserRepository;
 use App\Domain\Model\User\User;
 use function assert;
@@ -13,10 +17,14 @@ final class UserPersister implements DataPersisterInterface
 {
     private UserRepository $userRepository;
 
+    private TransactionalExecutor $transactionalExecutor;
+
     public function __construct(
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        TransactionalExecutor $transactionalExecutor
     ) {
-        $this->userRepository = $userRepository;
+        $this->userRepository        = $userRepository;
+        $this->transactionalExecutor = $transactionalExecutor;
     }
 
     /**
@@ -34,7 +42,13 @@ final class UserPersister implements DataPersisterInterface
     {
         assert($data instanceof User);
 
-        $this->userRepository->save($data);
+        try {
+            $this->transactionalExecutor->execute(function () use ($data) : void {
+                $this->userRepository->save($data);
+            });
+        } catch (UserPersistenceFailed | TransactionPersistenceFailed $exception) {
+            throw UserOperationFailed::wrap($exception);
+        }
 
         return $data;
     }

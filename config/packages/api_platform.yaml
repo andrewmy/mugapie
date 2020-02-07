@@ -16,12 +16,7 @@ api_platform:
         Doctrine\ORM\OptimisticLockException: 409
 
         # custom
-        App\Application\Exceptions\OrderOperationFailed: 400
-        App\Domain\Calculator\Exceptions\ShippingCalculationFailed: 400
-        App\Domain\Model\Order\Exceptions\OrderCreationFailed: 400
-        App\Domain\Model\Order\Exceptions\OrderPersistenceFailed: 503
-        App\Domain\Model\OrderItem\Exceptions\OrderItemCreationFailed: 400
-        App\Domain\Model\Product\Exceptions\ProductPersistenceFailed: 503
-        App\Domain\Model\Transaction\Exceptions\TransactionCreationFailed: 400
-        App\Domain\Model\Transaction\Exceptions\TransactionPersistenceFailed: 503
-        App\Domain\Model\User\Exceptions\UserPersistenceFailed: 503
+        App\Application\Exceptions\OrderOperationBadRequest: 400
+        App\Application\Exceptions\OrderOperationFailed: 503
+        App\Application\Exceptions\ProductOperationFailed: 503
+        App\Application\Exceptions\UserOperationFailed: 503

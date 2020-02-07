@@ -6,7 +6,7 @@ namespace App\Tests\Integration\Order;
 
 use App\Tests\Integration\IntegrationTestCase;
 
-class CreateOrderTest extends IntegrationTestCase
+final class CreateOrderTest extends IntegrationTestCase
 {
     public function testCreateSuccess() : void
     {

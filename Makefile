@@ -28,13 +28,13 @@ stan:
 	php vendor/bin/phpstan analyse && php vendor/bin/psalm --show-info=false
 
 test:
-	phpdbg -qrr -dmemory_limit=-1 vendor/bin/phpunit --stop-on-failure && vendor/bin/coverage-check var/coverage.xml 92
+	phpdbg -qrr -dmemory_limit=-1 vendor/bin/phpunit --stop-on-failure && vendor/bin/coverage-check var/coverage.xml 90
 
 phpunit-xml:
 	[ -f phpunit.xml ] || cp phpunit.xml.dist phpunit.xml
 
 mutate: test phpunit-xml
-	phpdbg -qrr vendor/bin/infection run --verbose --show-mutations --no-interaction --only-covered --coverage var --min-msi=90 --min-covered-msi=90 -j2
+	phpdbg -qrr vendor/bin/infection run --verbose --show-mutations --no-interaction --only-covered --coverage var --min-msi=88 --min-covered-msi=88 -j2
 
 clean:
 	rm -rf var/

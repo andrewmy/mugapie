@@ -7,7 +7,7 @@ namespace App\Tests\Integration\Order;
 use App\Domain\Model\OrderItem\Dto\CreateOrderItem;
 use App\Tests\Integration\IntegrationTestCase;
 
-class SendToProductionOrderTest extends IntegrationTestCase
+final class SendToProductionOrderTest extends IntegrationTestCase
 {
     public function testSendSuccess() : void
     {

@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Application\EventSubscriber\Order;
 
+use App\Application\Exceptions\OrderOperationFailed;
 use App\Domain\Model\Order\Events\OrderSentToProduction;
+use App\Domain\Model\Transaction\Exceptions\TransactionCreationFailed;
+use App\Domain\Model\Transaction\Exceptions\TransactionPersistenceFailed;
 use App\Domain\Model\Transaction\Interfaces\TransactionFactory;
 use App\Domain\Model\Transaction\Interfaces\TransactionRepository;
 use Psr\Log\LoggerInterface;
@@ -40,11 +43,15 @@ final class OrderSentToProductionHandler implements EventSubscriberInterface
 
     public function handle(OrderSentToProduction $event) : void
     {
-        $transaction = $this->transactionFactory->createForOrder(
-            $event->order(),
-            $event->order()->orderCost()->negative(),
-        );
-        $this->transactionRepository->save($transaction);
+        try {
+            $transaction = $this->transactionFactory->createForOrder(
+                $event->order(),
+                $event->order()->orderCost()->negative(),
+            );
+            $this->transactionRepository->save($transaction);
+        } catch (TransactionCreationFailed | TransactionPersistenceFailed $exception) {
+            throw OrderOperationFailed::wrap($exception);
+        }
 
         $this->logger->info('New transaction', [
             'transaction_id' => (string) $transaction->id(),

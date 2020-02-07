@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use function assert;
 
-class CreateOrderTest extends TestCase
+final class CreateOrderTest extends TestCase
 {
     public function testAddItemNoDuplicates() : void
     {

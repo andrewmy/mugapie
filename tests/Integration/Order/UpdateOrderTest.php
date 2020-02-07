@@ -7,7 +7,7 @@ namespace App\Tests\Integration\Order;
 use App\Domain\Model\OrderItem\Dto\CreateOrderItem;
 use App\Tests\Integration\IntegrationTestCase;
 
-class UpdateOrderTest extends IntegrationTestCase
+final class UpdateOrderTest extends IntegrationTestCase
 {
     public function testUpdate() : void
     {

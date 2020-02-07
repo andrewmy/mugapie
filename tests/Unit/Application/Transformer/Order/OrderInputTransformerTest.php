@@ -71,7 +71,7 @@ final class OrderInputTransformerTest extends TestCase
         $input->fullName     = 'A B';
         $input->items        = [];
 
-        self::expectNotToPerformAssertions();
+        $this->expectNotToPerformAssertions();
 
         $transformer->transform($input, Order::class);
     }
@@ -120,7 +120,7 @@ final class OrderInputTransformerTest extends TestCase
         $input->fullName     = 'A B';
         $input->items        = [];
 
-        self::expectNotToPerformAssertions();
+        $this->expectNotToPerformAssertions();
 
         $transformer->transform($input, Order::class, [
             AbstractItemNormalizer::OBJECT_TO_POPULATE => Order::create(

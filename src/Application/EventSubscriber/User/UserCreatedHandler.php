@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Application\EventSubscriber\User;
 
+use App\Application\Exceptions\UserOperationFailed;
+use App\Domain\Model\Transaction\Exceptions\TransactionCreationFailed;
+use App\Domain\Model\Transaction\Exceptions\TransactionPersistenceFailed;
 use App\Domain\Model\Transaction\Interfaces\TransactionFactory;
 use App\Domain\Model\Transaction\Interfaces\TransactionRepository;
 use App\Domain\Model\User\Events\UserCreated;
@@ -50,11 +53,15 @@ final class UserCreatedHandler implements EventSubscriberInterface
 
     public function handle(UserCreated $event) : void
     {
-        $transaction = $this->transactionFactory->createForUser(
-            $event->user(),
-            new Money($this->startingBalance, new Currency($this->currency)),
-        );
-        $this->transactionRepository->save($transaction);
+        try {
+            $transaction = $this->transactionFactory->createForUser(
+                $event->user(),
+                new Money($this->startingBalance, new Currency($this->currency)),
+            );
+            $this->transactionRepository->save($transaction);
+        } catch (TransactionCreationFailed | TransactionPersistenceFailed $exception) {
+            throw UserOperationFailed::wrap($exception);
+        }
 
         $this->logger->info('New transaction', [
             'transaction_id' => (string) $transaction->id(),

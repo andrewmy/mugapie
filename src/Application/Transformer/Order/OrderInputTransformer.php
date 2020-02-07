@@ -8,11 +8,14 @@ use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use ApiPlatform\Core\Serializer\AbstractItemNormalizer;
 use ApiPlatform\Core\Validator\ValidatorInterface;
 use App\Application\Dto\Order\OrderInput;
+use App\Application\Exceptions\OrderOperationBadRequest;
 use App\Application\Exceptions\OrderOperationFailed;
+use App\Domain\Calculator\Exceptions\ShippingCalculationFailed;
 use App\Domain\Calculator\Interfaces\OrderCostCalculator;
 use App\Domain\Model\Order\Order;
 use App\Domain\Model\Order\OrderId;
 use App\Domain\Model\Order\ShippingAddress;
+use App\Domain\Model\OrderItem\Exceptions\OrderItemCreationFailed;
 use App\Domain\Model\OrderItem\Interfaces\OrderItemFactory;
 use App\Domain\Model\User\User;
 use Ramsey\Uuid\Uuid;
@@ -85,28 +88,38 @@ final class OrderInputTransformer implements DataTransformerInterface
         );
 
         if (! $order->isEditable()) {
-            throw OrderOperationFailed::notEditable();
+            throw OrderOperationBadRequest::notEditable();
         }
 
         $this->checkForForeignProducts($object, $order->user());
 
-        $data      = $object->toDomainUpdate();
-        $orderCost = $this->orderCostCalculator->calculate(
-            $data->shippingType(),
-            $data->shippingAddress(),
-            $data->items()->toArray(),
-        );
+        $data = $object->toDomainUpdate();
+        try {
+            $orderCost = $this->orderCostCalculator->calculate(
+                $data->shippingType(),
+                $data->shippingAddress(),
+                $data->items()->toArray(),
+            );
+        } catch (ShippingCalculationFailed $exception) {
+            // passed validation but still failed => corrupted config
+
+            throw OrderOperationFailed::wrap($exception);
+        }
 
         if ($orderCost->greaterThan($order->user()->balance())) {
-            throw OrderOperationFailed::costTooHigh(
+            throw OrderOperationBadRequest::costTooHigh(
                 $orderCost,
                 $order->user()->balance(),
             );
         }
 
         $order->update($data, $orderCost);
-        foreach ($data->items() as $item) {
-            $this->orderItemFactory->create($order, $item);
+        try {
+            foreach ($data->items() as $item) {
+                $this->orderItemFactory->create($order, $item);
+            }
+        } catch (OrderItemCreationFailed $exception) {
+            throw OrderOperationFailed::wrap($exception);
         }
 
         return $order;
@@ -127,23 +140,31 @@ final class OrderInputTransformer implements DataTransformerInterface
 
         $this->checkForForeignProducts($object, $object->user);
 
-        $data      = $object->toDomainCreate();
-        $orderCost = $this->orderCostCalculator->calculate(
-            $data->shippingType(),
-            $data->shippingAddress(),
-            $data->items()->toArray(),
-        );
+        $data = $object->toDomainCreate();
+        try {
+            $orderCost = $this->orderCostCalculator->calculate(
+                $data->shippingType(),
+                $data->shippingAddress(),
+                $data->items()->toArray(),
+            );
+        } catch (ShippingCalculationFailed $exception) {
+            throw OrderOperationFailed::wrap($exception);
+        }
 
         if ($orderCost->greaterThan($object->user->balance())) {
-            throw OrderOperationFailed::costTooHigh(
+            throw OrderOperationBadRequest::costTooHigh(
                 $orderCost,
                 $object->user->balance(),
             );
         }
 
         $order = Order::create(new OrderId(Uuid::uuid4()), $data, $orderCost);
-        foreach ($data->items() as $item) {
-            $this->orderItemFactory->create($order, $item);
+        try {
+            foreach ($data->items() as $item) {
+                $this->orderItemFactory->create($order, $item);
+            }
+        } catch (OrderItemCreationFailed $exception) {
+            throw OrderOperationFailed::wrap($exception);
         }
 
         return $order;
@@ -161,7 +182,7 @@ final class OrderInputTransformer implements DataTransformerInterface
         }
 
         if (count($foreignProducts) > 0) {
-            throw OrderOperationFailed::hasForeignProducts($foreignProducts);
+            throw OrderOperationBadRequest::hasForeignProducts($foreignProducts);
         }
     }
 }

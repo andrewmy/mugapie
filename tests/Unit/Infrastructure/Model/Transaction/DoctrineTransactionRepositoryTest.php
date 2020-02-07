@@ -20,7 +20,7 @@ use Money\Money;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-class DoctrineTransactionRepositoryTest extends TestCase
+final class DoctrineTransactionRepositoryTest extends TestCase
 {
     public function testSaveFailed() : void
     {

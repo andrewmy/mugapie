@@ -22,7 +22,7 @@ use Money\Money;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-class DoctrineProductRepositoryTest extends TestCase
+final class DoctrineProductRepositoryTest extends TestCase
 {
     private static function product() : Product
     {

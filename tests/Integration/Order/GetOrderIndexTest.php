@@ -10,7 +10,7 @@ use function assert;
 use function json_decode;
 use const JSON_THROW_ON_ERROR;
 
-class GetOrderIndexTest extends IntegrationTestCase
+final class GetOrderIndexTest extends IntegrationTestCase
 {
     public function testIndex() : void
     {

@@ -30,7 +30,7 @@ use Money\Money;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-class DoctrineOrderRepositoryTest extends TestCase
+final class DoctrineOrderRepositoryTest extends TestCase
 {
     public function testSaveFailed() : void
     {

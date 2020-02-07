@@ -24,7 +24,7 @@ services:
       - APP_SECRET=muggle_api_e
       - APP_ENV=dev
       - CORS_ALLOW_ORIGIN="^https?://localhost(:[0-9]+)?$$" # escape $
-      - LOG_DESTINATION=php://stderr
+      - LOG_DESTINATION=php://stdout
 
   db:
     image: mysql:8.0

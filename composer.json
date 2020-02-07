@@ -23,6 +23,7 @@
         "moneyphp/money": "^3.3",
         "nelmio/cors-bundle": "^1.5 || ^2.0",
         "nesbot/carbon": "^2.29",
+        "psr/log": "^1.1",
         "ramsey/uuid": "^3.9",
         "ramsey/uuid-doctrine": "^1.6",
         "symfony/asset": "5.0.*",

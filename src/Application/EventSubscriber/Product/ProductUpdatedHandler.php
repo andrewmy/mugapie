@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace App\Application\EventSubscriber\Product;
 
+use App\Application\Exceptions\ProductOperationFailed;
+use App\Domain\Calculator\Exceptions\ShippingCalculationFailed;
 use App\Domain\Calculator\Interfaces\OrderCostCalculator;
+use App\Domain\Model\Order\Exceptions\OrderPersistenceFailed;
 use App\Domain\Model\Order\Interfaces\OrderRepository;
 use App\Domain\Model\OrderItem\Dto\CreateOrderItem;
+use App\Domain\Model\OrderItem\Exceptions\OrderItemCreationFailed;
 use App\Domain\Model\OrderItem\Interfaces\OrderItemFactory;
 use App\Domain\Model\OrderItem\OrderItem;
 use App\Domain\Model\Product\Events\ProductUpdated;
@@ -61,20 +65,32 @@ final class ProductUpdatedHandler implements EventSubscriberInterface
 
             $order->removeItem($oldItem);
 
-            $this->orderItemFactory->create(
-                $order,
-                new CreateOrderItem($product, $oldItem->units()),
-            );
+            try {
+                $this->orderItemFactory->create(
+                    $order,
+                    new CreateOrderItem($product, $oldItem->units()),
+                );
+            } catch (OrderItemCreationFailed $exception) {
+                throw ProductOperationFailed::wrap($exception);
+            }
 
-            $order->updateOrderCost(
-                $this->orderCostCalculator->calculate(
-                    $order->shippingType(),
-                    $order->shippingAddress(),
-                    $order->items()->toArray(),
-                ),
-            );
+            try {
+                $order->updateOrderCost(
+                    $this->orderCostCalculator->calculate(
+                        $order->shippingType(),
+                        $order->shippingAddress(),
+                        $order->items()->toArray(),
+                    ),
+                );
+            } catch (ShippingCalculationFailed $exception) {
+                throw ProductOperationFailed::wrap($exception);
+            }
 
-            $this->orderRepository->save($order);
+            try {
+                $this->orderRepository->save($order);
+            } catch (OrderPersistenceFailed $exception) {
+                throw ProductOperationFailed::wrap($exception);
+            }
 
             $this->logger->info('Updated order cost', [
                 'order_id' => (string) $order->id(),

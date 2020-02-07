@@ -16,6 +16,7 @@ use App\Domain\Model\Order\ShippingType;
 use App\Domain\Model\User\Dto\CreateUser;
 use App\Domain\Model\User\User;
 use App\Domain\Model\User\UserId;
+use App\Tests\Mocks\NullTransactionalExecutor;
 use Doctrine\ORM\ORMException;
 use Mockery;
 use Mockery\MockInterface;
@@ -44,6 +45,7 @@ final class OrderPersisterTest extends TestCase
                         );
                 }
             ),
+            new NullTransactionalExecutor(),
         );
 
         $this->expectException(OrderOperationFailed::class);

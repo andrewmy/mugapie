@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Handler\Order;
 
-use App\Application\Exceptions\OrderOperationFailed;
+use App\Application\Exceptions\OrderOperationBadRequest;
 use App\Domain\Model\Order\Interfaces\OrderRepository;
 use App\Domain\Model\Order\Order;
 use Psr\Log\LoggerInterface;
@@ -26,11 +26,11 @@ class SendToProductionHandler
     public function handle(Order $order) : Order
     {
         if (! $order->isEditable()) {
-            throw OrderOperationFailed::notEditable();
+            throw OrderOperationBadRequest::notEditable();
         }
 
         if ($order->orderCost()->greaterThan($order->user()->balance())) {
-            throw OrderOperationFailed::costTooHigh(
+            throw OrderOperationBadRequest::costTooHigh(
                 $order->orderCost(),
                 $order->user()->balance(),
             );
