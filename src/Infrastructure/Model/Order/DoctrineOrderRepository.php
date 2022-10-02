@@ -42,7 +42,8 @@ final class DoctrineOrderRepository implements OrderRepository
      */
     public function findAllPendingHavingProduct(Product $product) : array
     {
-        return $this->entityManager->createQueryBuilder()
+        /** @var Order[] $result */
+        $result = $this->entityManager->createQueryBuilder()
             ->from(Order::class, 'o')
             ->leftJoin('o.items', 'items')
             ->select(['o', 'items'])
@@ -54,5 +55,7 @@ final class DoctrineOrderRepository implements OrderRepository
             ])
             ->getQuery()
             ->getResult();
+
+        return $result;
     }
 }

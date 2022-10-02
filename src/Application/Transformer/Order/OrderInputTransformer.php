@@ -6,7 +6,7 @@ namespace App\Application\Transformer\Order;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use ApiPlatform\Core\Serializer\AbstractItemNormalizer;
-use ApiPlatform\Core\Validator\ValidatorInterface;
+use ApiPlatform\Validator\ValidatorInterface;
 use App\Application\Dto\Order\OrderInput;
 use App\Application\Exceptions\OrderOperationBadRequest;
 use App\Application\Exceptions\OrderOperationFailed;
@@ -136,9 +136,10 @@ final class OrderInputTransformer implements DataTransformerInterface
             ]
         );
 
-        assert($object->user !== null);
+        $user = $object->user;
+        assert($user !== null);
 
-        $this->checkForForeignProducts($object, $object->user);
+        $this->checkForForeignProducts($object, $user);
 
         $data = $object->toDomainCreate();
         try {
@@ -151,10 +152,10 @@ final class OrderInputTransformer implements DataTransformerInterface
             throw OrderOperationFailed::wrap($exception);
         }
 
-        if ($orderCost->greaterThan($object->user->balance())) {
+        if ($orderCost->greaterThan($user->balance())) {
             throw OrderOperationBadRequest::costTooHigh(
                 $orderCost,
-                $object->user->balance(),
+                $user->balance(),
             );
         }
 

@@ -80,13 +80,16 @@ abstract class IntegrationTestCase extends ApiTestCase
         $em = self::$container->get(EntityManagerInterface::class);
         assert($em instanceof EntityManagerInterface);
 
-        return $em->createQueryBuilder()
+        $result = $em->createQueryBuilder()
             ->from(User::class, 'u')
             ->select('u')
             ->where('u.id = :id')
             ->setParameter('id', $id->value()->getBytes())
             ->getQuery()
             ->getSingleResult();
+        assert($result instanceof User);
+
+        return $result;
     }
 
     protected function createProduct(User $user, string $id, string $type = 'mug') : Product
@@ -121,13 +124,16 @@ abstract class IntegrationTestCase extends ApiTestCase
         $em = self::$container->get(EntityManagerInterface::class);
         assert($em instanceof EntityManagerInterface);
 
-        return $em->createQueryBuilder()
+        $result = $em->createQueryBuilder()
             ->from(Product::class, 'p')
             ->select('p')
             ->where('p.id = :id')
             ->setParameter('id', $id->value()->getBytes())
             ->getQuery()
             ->getSingleResult();
+        assert($result instanceof Product);
+
+        return $result;
     }
 
     /**

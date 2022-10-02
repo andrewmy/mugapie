@@ -22,7 +22,7 @@ use App\Domain\Model\User\User;
 use App\Domain\Model\User\UserId;
 use App\Infrastructure\Model\Order\DoctrineOrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\EntityManagerClosed;
 use Mockery;
 use Mockery\MockInterface;
 use Money\Currency;
@@ -42,7 +42,7 @@ final class DoctrineOrderRepositoryTest extends TestCase
                         ->twice();
 
                     $mock->shouldReceive('flush')
-                        ->andThrow(ORMException::entityManagerClosed());
+                        ->andThrow(EntityManagerClosed::create());
                 }
             ),
         );

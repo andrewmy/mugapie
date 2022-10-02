@@ -18,7 +18,7 @@ final class DoctrineTransactionalExecutorTest extends TestCase
             Mockery::mock(
                 EntityManagerInterface::class,
                 static function (MockInterface $mock) : void {
-                    $mock->shouldReceive('transactional')
+                    $mock->shouldReceive('wrapInTransaction')
                         ->once()
                         ->andReturnUsing(static function (callable $operation) : void {
                             $operation();

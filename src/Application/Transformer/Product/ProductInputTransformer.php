@@ -6,7 +6,7 @@ namespace App\Application\Transformer\Product;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use ApiPlatform\Core\Serializer\AbstractItemNormalizer;
-use ApiPlatform\Core\Validator\ValidatorInterface;
+use ApiPlatform\Validator\ValidatorInterface;
 use App\Application\Dto\Product\ProductInput;
 use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductId;
@@ -34,7 +34,8 @@ final class ProductInputTransformer implements DataTransformerInterface
     {
         assert($object instanceof ProductInput);
 
-        $product                 = $context[AbstractItemNormalizer::OBJECT_TO_POPULATE] ?? null;
+        $product = $context[AbstractItemNormalizer::OBJECT_TO_POPULATE] ?? null;
+        assert($product instanceof Product || $product === null);
         $object->referenceEntity = $product;
 
         if ($product instanceof Product) {

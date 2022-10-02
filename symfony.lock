@@ -137,17 +137,11 @@
     "doctrine/persistence": {
         "version": "1.3.6"
     },
-    "doctrine/reflection": {
-        "version": "v1.1.0"
-    },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.0.4"
     },
     "felixfbecker/language-server-protocol": {
         "version": "v1.4.0"
-    },
-    "fig/link-util": {
-        "version": "1.1.0"
     },
     "hamcrest/hamcrest-php": {
         "version": "v2.0.0"
@@ -158,9 +152,6 @@
     "insolita/unused-scanner": {
         "version": "2.1.1"
     },
-    "jdorn/sql-formatter": {
-        "version": "v1.2.17"
-    },
     "justinrainbow/json-schema": {
         "version": "5.2.9"
     },
@@ -169,12 +160,6 @@
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
-    },
-    "laminas/laminas-eventmanager": {
-        "version": "3.2.1"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.0.1"
     },
     "maglnet/composer-require-checker": {
         "version": "2.1.0"
@@ -238,9 +223,6 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.0.1"
-    },
-    "phpspec/prophecy": {
-        "version": "v1.10.2"
     },
     "phpstan/phpdoc-parser": {
         "version": "0.4.2"
@@ -311,6 +293,18 @@
     "psr/log": {
         "version": "1.1.2"
     },
+    "qossmic/deptrac-shim": {
+        "version": "0.24",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.19",
+            "ref": "3c3daab46226c37fc14e10faf81df737a3039d96"
+        },
+        "files": [
+            "deptrac.yaml"
+        ]
+    },
     "ramsey/uuid": {
         "version": "3.9.2"
     },
@@ -370,9 +364,6 @@
     },
     "seld/jsonlint": {
         "version": "1.7.2"
-    },
-    "sensiolabs-de/deptrac-shim": {
-        "version": "0.6.0"
     },
     "slevomat/coding-standard": {
         "version": "6.1.1"
@@ -482,13 +473,7 @@
     "symfony/http-kernel": {
         "version": "v5.0.3"
     },
-    "symfony/inflector": {
-        "version": "v5.0.3"
-    },
     "symfony/intl": {
-        "version": "v5.0.3"
-    },
-    "symfony/mime": {
         "version": "v5.0.3"
     },
     "symfony/monolog-bridge": {
@@ -526,12 +511,6 @@
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
-    },
-    "symfony/polyfill-intl-icu": {
-        "version": "v1.13.1"
-    },
-    "symfony/polyfill-intl-idn": {
-        "version": "v1.13.1"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.13.1"
@@ -658,9 +637,6 @@
     },
     "vimeo/psalm": {
         "version": "3.8.3"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.0.0"
     },
     "webmozart/assert": {
         "version": "1.6.0"
