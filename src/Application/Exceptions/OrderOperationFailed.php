@@ -6,6 +6,7 @@ namespace App\Application\Exceptions;
 
 use RuntimeException;
 use Throwable;
+
 use function sprintf;
 
 final class OrderOperationFailed extends RuntimeException
@@ -15,7 +16,7 @@ final class OrderOperationFailed extends RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    public static function wrap(Throwable $previous) : self
+    public static function wrap(Throwable $previous): self
     {
         return new self(
             sprintf('Order operation failed: %s', $previous->getMessage()),

@@ -13,9 +13,7 @@ use Money\Currency;
 use Money\Money;
 use Ramsey\Uuid\Uuid;
 
-/**
- * @codeCoverageIgnore
- */
+/** @codeCoverageIgnore */
 final class UserFixture extends Fixture
 {
     private Currency $currency;
@@ -25,7 +23,7 @@ final class UserFixture extends Fixture
         $this->currency = new Currency($currency);
     }
 
-    public function load(ObjectManager $manager) : void
+    public function load(ObjectManager $manager): void
     {
         $list = [
             ['nickname' => 'Founding Member'],

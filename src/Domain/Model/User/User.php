@@ -62,7 +62,7 @@ class User implements RecordsEvents
         $this->recordThat(new UserCreated($this));
     }
 
-    public static function create(UserId $id, CreateUser $data) : self
+    public static function create(UserId $id, CreateUser $data): self
     {
         $obj           = new self();
         $obj->id       = $id->value();
@@ -72,34 +72,34 @@ class User implements RecordsEvents
         return $obj;
     }
 
-    public function update(UpdateUser $data) : void
+    public function update(UpdateUser $data): void
     {
         $this->nickname = $data->nickname();
 
         $this->updatedAt = Carbon::now();
     }
 
-    public function id() : UserId
+    public function id(): UserId
     {
         return new UserId($this->id);
     }
 
-    public function createdAt() : DateTimeInterface
+    public function createdAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function updatedAt() : DateTimeInterface
+    public function updatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function balance() : Money
+    public function balance(): Money
     {
         return $this->balance;
     }
 
-    public function adjustBalanceByAmount(int $amount) : void
+    public function adjustBalanceByAmount(int $amount): void
     {
         $this->balance = $this->balance->add(
             new Money($amount, $this->balance->getCurrency()),
@@ -108,20 +108,18 @@ class User implements RecordsEvents
         $this->updatedAt = Carbon::now();
     }
 
-    public function nickname() : ?string
+    public function nickname(): ?string
     {
         return $this->nickname;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function products() : Collection
+    /** @return Collection<int, Product> */
+    public function products(): Collection
     {
         return $this->products;
     }
 
-    public function addProduct(Product $product) : void
+    public function addProduct(Product $product): void
     {
         if ($this->products()->contains($product)) {
             return;
@@ -133,15 +131,13 @@ class User implements RecordsEvents
         $this->updatedAt = Carbon::now();
     }
 
-    /**
-     * @return Collection<int, Order>
-     */
-    public function orders() : Collection
+    /** @return Collection<int, Order> */
+    public function orders(): Collection
     {
         return $this->orders;
     }
 
-    public function addOrder(Order $order) : void
+    public function addOrder(Order $order): void
     {
         if ($this->orders()->contains($order)) {
             return;
@@ -153,15 +149,13 @@ class User implements RecordsEvents
         $this->updatedAt = Carbon::now();
     }
 
-    /**
-     * @return Collection<int, Transaction>
-     */
-    public function transactions() : Collection
+    /** @return Collection<int, Transaction> */
+    public function transactions(): Collection
     {
         return $this->transactions;
     }
 
-    public function addTransaction(Transaction $transaction) : void
+    public function addTransaction(Transaction $transaction): void
     {
         if ($this->transactions()->contains($transaction)) {
             return;

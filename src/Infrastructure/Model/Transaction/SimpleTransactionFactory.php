@@ -16,7 +16,7 @@ use Throwable;
 
 final class SimpleTransactionFactory implements TransactionFactory
 {
-    public function createForUser(User $user, Money $amount) : Transaction
+    public function createForUser(User $user, Money $amount): Transaction
     {
         try {
             return Transaction::createForUser(
@@ -29,7 +29,7 @@ final class SimpleTransactionFactory implements TransactionFactory
         }
     }
 
-    public function createForOrder(Order $order, Money $amount) : Transaction
+    public function createForOrder(Order $order, Money $amount): Transaction
     {
         try {
             return Transaction::createForOrder(

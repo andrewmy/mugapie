@@ -7,6 +7,7 @@ namespace App\Application\Transformer\Product;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use App\Application\Dto\Product\ProductOutput;
 use App\Domain\Model\Product\Product;
+
 use function assert;
 
 final class ProductOutputTransformer implements DataTransformerInterface
@@ -16,7 +17,7 @@ final class ProductOutputTransformer implements DataTransformerInterface
      * @param string       $to
      * @param array<mixed> $context
      */
-    public function transform($object, string $to, array $context = []) : ProductOutput
+    public function transform($object, string $to, array $context = []): ProductOutput
     {
         assert($object instanceof Product);
 
@@ -37,7 +38,7 @@ final class ProductOutputTransformer implements DataTransformerInterface
      * @param string              $to
      * @param array<mixed>        $context
      */
-    public function supportsTransformation($data, string $to, array $context = []) : bool
+    public function supportsTransformation($data, string $to, array $context = []): bool
     {
         return $to === ProductOutput::class && $data instanceof Product;
     }

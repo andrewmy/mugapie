@@ -6,6 +6,7 @@ namespace App\Domain\Model\Order\Exceptions;
 
 use RuntimeException;
 use Throwable;
+
 use function sprintf;
 
 final class OrderPersistenceFailed extends RuntimeException
@@ -15,7 +16,7 @@ final class OrderPersistenceFailed extends RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    public static function saveFailed(Throwable $previous) : self
+    public static function saveFailed(Throwable $previous): self
     {
         return new self(
             sprintf('Order save failed: %s', $previous->getMessage()),

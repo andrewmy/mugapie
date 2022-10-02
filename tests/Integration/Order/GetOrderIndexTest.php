@@ -6,17 +6,16 @@ namespace App\Tests\Integration\Order;
 
 use App\Domain\Model\OrderItem\Dto\CreateOrderItem;
 use App\Tests\Integration\IntegrationTestCase;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+
 use function assert;
 use function is_array;
 use function json_decode;
+
 use const JSON_THROW_ON_ERROR;
 
 final class GetOrderIndexTest extends IntegrationTestCase
 {
-    use ArraySubsetAsserts;
-
-    public function testIndex() : void
+    public function testIndex(): void
     {
         $user = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
         $this->createUser('5f86ec67-9de9-4b22-a4f5-ded8d25b9146');

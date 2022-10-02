@@ -9,7 +9,7 @@ use App\Tests\Integration\IntegrationTestCase;
 
 final class SendToProductionOrderTest extends IntegrationTestCase
 {
-    public function testSendSuccess() : void
+    public function testSendSuccess(): void
     {
         $user    = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
         $product = $this->createProduct($user, 'f032d950-9c3e-4336-b133-74afd5bb31e5');
@@ -67,7 +67,7 @@ final class SendToProductionOrderTest extends IntegrationTestCase
         self::assertJsonContains(['detail' => 'Order is not editable']);
     }
 
-    public function testSendTooExpensiveFails() : void
+    public function testSendTooExpensiveFails(): void
     {
         $user    = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
         $product = $this->createProduct($user, 'f032d950-9c3e-4336-b133-74afd5bb31e5');

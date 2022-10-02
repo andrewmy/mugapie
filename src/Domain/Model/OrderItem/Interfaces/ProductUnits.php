@@ -8,7 +8,7 @@ use App\Domain\Model\Product\Product;
 
 interface ProductUnits
 {
-    public function product() : Product;
+    public function product(): Product;
 
-    public function units() : int;
+    public function units(): int;
 }

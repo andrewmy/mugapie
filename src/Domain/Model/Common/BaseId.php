@@ -15,12 +15,12 @@ abstract class BaseId
         $this->value = $value;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->value()->toString();
     }
 
-    public function value() : UuidInterface
+    public function value(): UuidInterface
     {
         return $this->value;
     }

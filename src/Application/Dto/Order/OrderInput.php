@@ -13,6 +13,7 @@ use App\Domain\Model\User\User;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints;
 use ZipCodeValidator\Constraints\ZipCode;
+
 use function assert;
 
 final class OrderInput
@@ -119,7 +120,7 @@ final class OrderInput
      */
     public array $items;
 
-    public function toDomainCreate() : CreateOrder
+    public function toDomainCreate(): CreateOrder
     {
         assert($this->user !== null);
 
@@ -136,7 +137,7 @@ final class OrderInput
         return $data;
     }
 
-    public function toDomainUpdate() : UpdateOrder
+    public function toDomainUpdate(): UpdateOrder
     {
         $data = new UpdateOrder(
             new ShippingType($this->shippingType),
@@ -150,7 +151,7 @@ final class OrderInput
         return $data;
     }
 
-    private function shippingAddress() : ShippingAddress
+    private function shippingAddress(): ShippingAddress
     {
         return ShippingAddress::isDomesticCountry($this->countryCode)
             ? ShippingAddress::createDomestic(
@@ -172,7 +173,7 @@ final class OrderInput
             );
     }
 
-    public function countryCode() : string
+    public function countryCode(): string
     {
         return $this->countryCode;
     }

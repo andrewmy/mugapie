@@ -6,6 +6,7 @@ namespace App\Domain\Model\User\Exceptions;
 
 use RuntimeException;
 use Throwable;
+
 use function sprintf;
 
 final class UserPersistenceFailed extends RuntimeException
@@ -15,7 +16,7 @@ final class UserPersistenceFailed extends RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    public static function saveFailed(Throwable $previous) : self
+    public static function saveFailed(Throwable $previous): self
     {
         return new self(
             sprintf('User save failed: %s', $previous->getMessage()),
@@ -23,7 +24,7 @@ final class UserPersistenceFailed extends RuntimeException
         );
     }
 
-    public static function deleteFailed(Throwable $previous) : self
+    public static function deleteFailed(Throwable $previous): self
     {
         return new self(
             sprintf('User delete failed: %s', $previous->getMessage()),

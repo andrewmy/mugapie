@@ -58,3 +58,6 @@ services:
     App\Application\EventSubscriber\DomainEventCollector:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
+
+    Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor:
+        tags: ['property_info.type_extractor']

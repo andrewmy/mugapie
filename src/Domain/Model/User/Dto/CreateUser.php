@@ -20,12 +20,12 @@ final class CreateUser
         $this->balance  = $balance;
     }
 
-    public function nickname() : ?string
+    public function nickname(): ?string
     {
         return $this->nickname;
     }
 
-    public function balance() : Money
+    public function balance(): Money
     {
         return $this->balance;
     }

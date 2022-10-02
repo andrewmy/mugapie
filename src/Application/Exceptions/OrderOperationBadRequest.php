@@ -8,6 +8,7 @@ use App\Domain\Model\Product\ProductId;
 use Money\Money;
 use RuntimeException;
 use Throwable;
+
 use function array_map;
 use function implode;
 use function sprintf;
@@ -19,7 +20,7 @@ final class OrderOperationBadRequest extends RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    public static function costTooHigh(Money $cost, Money $balance) : self
+    public static function costTooHigh(Money $cost, Money $balance): self
     {
         return new self(
             sprintf(
@@ -32,20 +33,18 @@ final class OrderOperationBadRequest extends RuntimeException
         );
     }
 
-    public static function notEditable() : self
+    public static function notEditable(): self
     {
         return new self('Order is not editable');
     }
 
-    /**
-     * @param ProductId[] $products
-     */
-    public static function hasForeignProducts(array $products) : self
+    /** @param ProductId[] $products */
+    public static function hasForeignProducts(array $products): self
     {
         return new self(
             sprintf(
                 'Cannot proceed with order, it contains products from another user: %s',
-                implode(', ', array_map(static function (ProductId $id) : string {
+                implode(', ', array_map(static function (ProductId $id): string {
                     return (string) $id;
                 }, $products)),
             ),

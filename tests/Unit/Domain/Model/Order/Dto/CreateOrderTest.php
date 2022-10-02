@@ -19,11 +19,12 @@ use Money\Currency;
 use Money\Money;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
+
 use function assert;
 
 final class CreateOrderTest extends TestCase
 {
-    public function testAddItemNoDuplicates() : void
+    public function testAddItemNoDuplicates(): void
     {
         $user = User::create(
             new UserId(Uuid::uuid4()),

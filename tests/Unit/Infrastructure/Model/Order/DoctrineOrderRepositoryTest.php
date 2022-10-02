@@ -32,25 +32,25 @@ use Ramsey\Uuid\Uuid;
 
 final class DoctrineOrderRepositoryTest extends TestCase
 {
-    public function testSaveFailed() : void
+    public function testSaveFailed(): void
     {
         $repository = new DoctrineOrderRepository(
             Mockery::mock(
                 EntityManagerInterface::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('persist')
                         ->twice();
 
                     $mock->shouldReceive('flush')
                         ->andThrow(EntityManagerClosed::create());
-                }
+                },
             ),
         );
 
         $this->expectException(OrderPersistenceFailed::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
-            'Order save failed: The EntityManager is closed.'
+            'Order save failed: The EntityManager is closed.',
         );
 
         $user  = User::create(

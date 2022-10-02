@@ -11,10 +11,8 @@ final class ShippingType extends EnumString
     public const STANDARD = 'standard';
     public const EXPRESS  = 'express';
 
-    /**
-     * @return string[]
-     */
-    public static function validValues() : array
+    /** @return string[] */
+    public static function validValues(): array
     {
         return [
             self::STANDARD,

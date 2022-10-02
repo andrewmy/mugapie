@@ -7,6 +7,7 @@ namespace App\Application\Transformer\OrderItem;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use App\Application\Dto\OrderItem\OrderItemOutput;
 use App\Domain\Model\OrderItem\OrderItem;
+
 use function assert;
 
 final class OrderItemOutputTransformer implements DataTransformerInterface
@@ -16,7 +17,7 @@ final class OrderItemOutputTransformer implements DataTransformerInterface
      * @param string       $to
      * @param array<mixed> $context
      */
-    public function transform($object, string $to, array $context = []) : OrderItemOutput
+    public function transform($object, string $to, array $context = []): OrderItemOutput
     {
         assert($object instanceof OrderItem);
 
@@ -38,7 +39,7 @@ final class OrderItemOutputTransformer implements DataTransformerInterface
      * @param string              $to
      * @param array<mixed>        $context
      */
-    public function supportsTransformation($data, string $to, array $context = []) : bool
+    public function supportsTransformation($data, string $to, array $context = []): bool
     {
         return $to === OrderItemOutput::class && $data instanceof OrderItem;
     }

@@ -22,15 +22,15 @@ use Ramsey\Uuid\Uuid;
 
 class UserPersisterTest extends TestCase
 {
-    public function testPersistFailed() : void
+    public function testPersistFailed(): void
     {
         $persister = new UserPersister(
             Mockery::mock(
                 UserRepository::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('save')
                         ->once()
-                        ->withArgs(static function (User $user) : bool {
+                        ->withArgs(static function (User $user): bool {
                             return (string) $user->id() === '4c898b2c-d38e-4b7b-89cf-ee301ddb6942';
                         })
                         ->andThrow(
@@ -38,7 +38,7 @@ class UserPersisterTest extends TestCase
                                 EntityManagerClosed::create(),
                             ),
                         );
-                }
+                },
             ),
             new NullTransactionalExecutor(),
         );

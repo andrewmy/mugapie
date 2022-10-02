@@ -9,7 +9,7 @@ use App\Tests\Integration\IntegrationTestCase;
 
 final class GetOrderTest extends IntegrationTestCase
 {
-    public function testGet() : void
+    public function testGet(): void
     {
         $user    = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
         $product = $this->createProduct($user, 'f032d950-9c3e-4336-b133-74afd5bb31e5');

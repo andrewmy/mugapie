@@ -11,8 +11,6 @@ use App\Domain\Model\OrderItem\OrderItem;
 
 interface OrderItemFactory
 {
-    /**
-     * @throws OrderItemCreationFailed
-     */
-    public function create(Order $order, CreateOrderItem $data) : OrderItem;
+    /** @throws OrderItemCreationFailed */
+    public function create(Order $order, CreateOrderItem $data): OrderItem;
 }

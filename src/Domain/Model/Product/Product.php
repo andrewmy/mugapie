@@ -59,7 +59,7 @@ class Product implements RecordsEvents
     public static function create(
         ProductId $id,
         CreateProduct $data
-    ) : self {
+    ): self {
         $obj        = new self();
         $obj->id    = $id->value();
         $obj->type  = $data->type();
@@ -72,7 +72,7 @@ class Product implements RecordsEvents
         return $obj;
     }
 
-    public function update(UpdateProduct $data) : void
+    public function update(UpdateProduct $data): void
     {
         $this->type  = $data->type();
         $this->title = $data->title();
@@ -84,54 +84,54 @@ class Product implements RecordsEvents
         $this->recordThat(new ProductUpdated($this));
     }
 
-    public function id() : ProductId
+    public function id(): ProductId
     {
         return new ProductId($this->id);
     }
 
-    public function incrementalId() : ?int
+    public function incrementalId(): ?int
     {
         return $this->incrementalId;
     }
 
-    public function user() : User
+    public function user(): User
     {
         return $this->user;
     }
 
-    public function linkUser(User $user) : void
+    public function linkUser(User $user): void
     {
         $this->user = $user;
 
         $this->updatedAt = Carbon::now();
     }
 
-    public function createdAt() : DateTimeInterface
+    public function createdAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function updatedAt() : DateTimeInterface
+    public function updatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function type() : ProductType
+    public function type(): ProductType
     {
         return $this->type;
     }
 
-    public function title() : string
+    public function title(): string
     {
         return $this->title;
     }
 
-    public function sku() : string
+    public function sku(): string
     {
         return $this->sku;
     }
 
-    public function cost() : Money
+    public function cost(): Money
     {
         return $this->cost;
     }

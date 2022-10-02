@@ -27,7 +27,7 @@ final class CreateOrder
         $this->items = new ArrayCollection();
     }
 
-    public function user() : User
+    public function user(): User
     {
         return $this->user;
     }

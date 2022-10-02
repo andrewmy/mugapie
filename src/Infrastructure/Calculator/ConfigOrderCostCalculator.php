@@ -12,6 +12,7 @@ use App\Domain\Model\OrderItem\Interfaces\ProductUnits;
 use App\Domain\Model\Product\ProductType;
 use Money\Currency;
 use Money\Money;
+
 use function array_reduce;
 
 final class ConfigOrderCostCalculator implements OrderCostCalculator
@@ -21,23 +22,19 @@ final class ConfigOrderCostCalculator implements OrderCostCalculator
 
     private Currency $currency;
 
-    /**
-     * @param array<string, array<string, array<string, array<string, int>>>> $shippingCosts
-     */
+    /** @param array<string, array<string, array<string, array<string, int>>>> $shippingCosts */
     public function __construct(array $shippingCosts, string $currency)
     {
         $this->shippingCosts = $shippingCosts;
         $this->currency      = new Currency($currency);
     }
 
-    /**
-     * @param ProductUnits[] $items
-     */
+    /** @param ProductUnits[] $items */
     public function calculate(
         ShippingType $shippingType,
         ShippingAddress $address,
         array $items
-    ) : Money {
+    ): Money {
         $shippingCosts = $this->shippingCosts[$shippingType->value()][$address->isDomestic() ? 'domestic' : 'international'] ?? null;
 
         if ($shippingCosts === null) {
@@ -53,7 +50,7 @@ final class ConfigOrderCostCalculator implements OrderCostCalculator
 
         return array_reduce(
             $items,
-            function (Money $carry, ProductUnits $item) use ($shippingCosts, &$hasItems) : Money {
+            function (Money $carry, ProductUnits $item) use ($shippingCosts, &$hasItems): Money {
                 $type            = $item->product()->type()->value();
                 $shippingFirst   = $shippingCosts[$type][$hasItems[$type] ? 'next' : 'first'];
                 $hasItems[$type] = true;
@@ -63,7 +60,7 @@ final class ConfigOrderCostCalculator implements OrderCostCalculator
                 )->add(new Money($shippingFirst, $this->currency))
                     ->add(
                         (new Money($shippingCosts[$type]['next'], $this->currency))
-                            ->multiply($item->units() - 1)
+                            ->multiply($item->units() - 1),
                     );
             },
             new Money(0, $this->currency),

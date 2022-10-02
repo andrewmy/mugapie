@@ -16,7 +16,7 @@ final class ProductUpdated implements Event
         $this->product = $product;
     }
 
-    public function product() : Product
+    public function product(): Product
     {
         return $this->product;
     }

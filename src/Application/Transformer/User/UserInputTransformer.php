@@ -10,6 +10,7 @@ use App\Application\Dto\User\UserInput;
 use App\Domain\Model\User\User;
 use App\Domain\Model\User\UserId;
 use Ramsey\Uuid\Uuid;
+
 use function assert;
 
 final class UserInputTransformer implements DataTransformerInterface
@@ -26,7 +27,7 @@ final class UserInputTransformer implements DataTransformerInterface
      * @param string       $to
      * @param array<mixed> $context
      */
-    public function transform($object, string $to, array $context = []) : User
+    public function transform($object, string $to, array $context = []): User
     {
         assert($object instanceof UserInput);
 
@@ -49,7 +50,7 @@ final class UserInputTransformer implements DataTransformerInterface
      * @param string              $to
      * @param array<mixed>        $context
      */
-    public function supportsTransformation($data, string $to, array $context = []) : bool
+    public function supportsTransformation($data, string $to, array $context = []): bool
     {
         if ($data instanceof User) {
             return false;

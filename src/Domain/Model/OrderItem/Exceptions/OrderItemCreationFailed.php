@@ -6,6 +6,7 @@ namespace App\Domain\Model\OrderItem\Exceptions;
 
 use RuntimeException;
 use Throwable;
+
 use function sprintf;
 
 final class OrderItemCreationFailed extends RuntimeException
@@ -15,7 +16,7 @@ final class OrderItemCreationFailed extends RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    public static function wrap(Throwable $previous) : self
+    public static function wrap(Throwable $previous): self
     {
         return new self(
             sprintf('Order item creation failed: %s', $previous->getMessage()),

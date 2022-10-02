@@ -14,6 +14,7 @@ use Money\Currency;
 use Money\Money;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints;
+
 use function assert;
 
 /**
@@ -70,7 +71,7 @@ final class ProductInput
      */
     public int $cost = 0;
 
-    public function toDomainCreate(string $currency) : CreateProduct
+    public function toDomainCreate(string $currency): CreateProduct
     {
         assert($this->user !== null);
 
@@ -83,7 +84,7 @@ final class ProductInput
         );
     }
 
-    public function toDomainUpdate(string $currency) : UpdateProduct
+    public function toDomainUpdate(string $currency): UpdateProduct
     {
         return new UpdateProduct(
             new ProductType($this->type),

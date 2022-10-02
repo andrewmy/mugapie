@@ -46,12 +46,12 @@ final class UserCreatedHandler implements EventSubscriberInterface
      *
      * @codeCoverageIgnore
      */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [UserCreated::class => 'handle'];
     }
 
-    public function handle(UserCreated $event) : void
+    public function handle(UserCreated $event): void
     {
         try {
             $transaction = $this->transactionFactory->createForUser(

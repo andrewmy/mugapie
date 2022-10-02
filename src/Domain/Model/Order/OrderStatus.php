@@ -11,10 +11,8 @@ final class OrderStatus extends EnumString
     public const PENDING    = 'pending';
     public const PRODUCTION = 'production';
 
-    /**
-     * @return string[]
-     */
-    public static function validValues() : array
+    /** @return string[] */
+    public static function validValues(): array
     {
         return [
             self::PENDING,

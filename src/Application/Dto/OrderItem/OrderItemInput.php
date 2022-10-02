@@ -25,7 +25,7 @@ final class OrderItemInput
      */
     public int $units;
 
-    public function toDomainCreate() : CreateOrderItem
+    public function toDomainCreate(): CreateOrderItem
     {
         return new CreateOrderItem(
             $this->product,

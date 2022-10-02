@@ -41,7 +41,7 @@ class Transaction implements RecordsEvents
         TransactionId $id,
         User $user,
         Money $amount
-    ) : self {
+    ): self {
         $obj     = new self();
         $obj->id = $id->value();
         $user->addTransaction($obj);
@@ -54,7 +54,7 @@ class Transaction implements RecordsEvents
         TransactionId $id,
         Order $order,
         Money $amount
-    ) : self {
+    ): self {
         $obj     = new self();
         $obj->id = $id->value();
         $order->user()->addTransaction($obj);
@@ -64,37 +64,37 @@ class Transaction implements RecordsEvents
         return $obj;
     }
 
-    public function id() : TransactionId
+    public function id(): TransactionId
     {
         return new TransactionId($this->id);
     }
 
-    public function incrementalId() : ?int
+    public function incrementalId(): ?int
     {
         return $this->incrementalId;
     }
 
-    public function createdAt() : DateTimeInterface
+    public function createdAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function user() : User
+    public function user(): User
     {
         return $this->user;
     }
 
-    public function linkUser(User $user) : void
+    public function linkUser(User $user): void
     {
         $this->user = $user;
     }
 
-    public function order() : ?Order
+    public function order(): ?Order
     {
         return $this->order;
     }
 
-    public function amount() : Money
+    public function amount(): Money
     {
         return $this->amount;
     }

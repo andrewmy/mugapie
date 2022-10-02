@@ -18,7 +18,7 @@ RUN NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
 		pdo_mysql \
 		intl
 
-COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY ./docker/php.ini /usr/local/etc/php/conf.d/
 

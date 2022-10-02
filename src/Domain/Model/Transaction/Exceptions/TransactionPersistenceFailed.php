@@ -6,6 +6,7 @@ namespace App\Domain\Model\Transaction\Exceptions;
 
 use RuntimeException;
 use Throwable;
+
 use function sprintf;
 
 final class TransactionPersistenceFailed extends RuntimeException
@@ -15,7 +16,7 @@ final class TransactionPersistenceFailed extends RuntimeException
         parent::__construct($message, 0, $previous);
     }
 
-    public static function saveFailed(Throwable $previous) : self
+    public static function saveFailed(Throwable $previous): self
     {
         return new self(
             sprintf('Transaction save failed: %s', $previous->getMessage()),

@@ -16,13 +16,13 @@ if (file_exists($envFile)) {
 
 if (is_array($env) && (! isset($env['APP_ENV']) || ($_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? $env['APP_ENV']) === $env['APP_ENV'])) {
     foreach ($env as $k => $v) {
-        $_ENV[$k] = $_ENV[$k] ?? (isset($_SERVER[$k]) && strpos($k, 'HTTP_') !== 0 ? $_SERVER[$k] : $v);
+        $_ENV[$k] ??= (isset($_SERVER[$k]) && strpos($k, 'HTTP_') !== 0 ? $_SERVER[$k] : $v);
     }
 } elseif (! class_exists(Dotenv::class)) {
     throw new RuntimeException('Please run "composer require symfony/dotenv" to load the ".env" files configuring the application.');
 } else {
     // load all the .env files
-    (new Dotenv(false))->loadEnv(dirname(__DIR__) . '/.env');
+    (new Dotenv())->loadEnv(dirname(__DIR__) . '/.env');
 }
 
 $_SERVER             += $_ENV;

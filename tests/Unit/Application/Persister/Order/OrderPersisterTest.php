@@ -27,15 +27,15 @@ use Ramsey\Uuid\Uuid;
 
 final class OrderPersisterTest extends TestCase
 {
-    public function testPersistFailed() : void
+    public function testPersistFailed(): void
     {
         $persister = new OrderPersister(
             Mockery::mock(
                 OrderRepository::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('save')
                         ->once()
-                        ->withArgs(static function (Order $order) : bool {
+                        ->withArgs(static function (Order $order): bool {
                             return (string) $order->id() === '4c898b2c-d38e-4b7b-89cf-ee301ddb6942';
                         })
                         ->andThrow(
@@ -43,7 +43,7 @@ final class OrderPersisterTest extends TestCase
                                 EntityManagerClosed::create(),
                             ),
                         );
-                }
+                },
             ),
             new NullTransactionalExecutor(),
         );

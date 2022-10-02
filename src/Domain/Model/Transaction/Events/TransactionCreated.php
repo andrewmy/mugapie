@@ -16,7 +16,7 @@ final class TransactionCreated implements Event
         $this->transaction = $transaction;
     }
 
-    public function transaction() : Transaction
+    public function transaction(): Transaction
     {
         return $this->transaction;
     }

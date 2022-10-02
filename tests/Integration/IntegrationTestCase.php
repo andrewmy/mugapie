@@ -28,21 +28,22 @@ use Doctrine\ORM\EntityManagerInterface;
 use Money\Currency;
 use Money\Money;
 use Ramsey\Uuid\Uuid;
+
 use function assert;
 use function in_array;
 use function json_encode;
 
 abstract class IntegrationTestCase extends ApiTestCase
 {
-    /**
-     * @param array<mixed> $data
-     */
+    /** @param array<mixed> $data */
     protected function request(
         string $method,
         string $endpoint,
         array $data = []
-    ) : Client {
-        $client  = static::createClient();
+    ): Client {
+        /** @var Client $client */
+        $client = static::createClient();
+
         $options = [
             'headers' => [
                 'accept' => ['application/json'],
@@ -58,7 +59,7 @@ abstract class IntegrationTestCase extends ApiTestCase
         return $client;
     }
 
-    protected function createUser(string $id) : User
+    protected function createUser(string $id): User
     {
         self::bootKernel();
         $repository = self::$container->get(UserRepository::class);
@@ -75,7 +76,7 @@ abstract class IntegrationTestCase extends ApiTestCase
         return $user;
     }
 
-    private function getManagedUser(UserId $id) : User
+    private function getManagedUser(UserId $id): User
     {
         $em = self::$container->get(EntityManagerInterface::class);
         assert($em instanceof EntityManagerInterface);
@@ -92,7 +93,7 @@ abstract class IntegrationTestCase extends ApiTestCase
         return $result;
     }
 
-    protected function createProduct(User $user, string $id, string $type = 'mug') : Product
+    protected function createProduct(User $user, string $id, string $type = 'mug'): Product
     {
         self::bootKernel();
 
@@ -119,7 +120,7 @@ abstract class IntegrationTestCase extends ApiTestCase
         return $product;
     }
 
-    private function getManagedProduct(ProductId $id) : Product
+    private function getManagedProduct(ProductId $id): Product
     {
         $em = self::$container->get(EntityManagerInterface::class);
         assert($em instanceof EntityManagerInterface);
@@ -136,14 +137,12 @@ abstract class IntegrationTestCase extends ApiTestCase
         return $result;
     }
 
-    /**
-     * @param CreateOrderItem[] $items
-     */
+    /** @param CreateOrderItem[] $items */
     protected function createOrder(
         User $user,
         string $id,
         array $items
-    ) : Order {
+    ): Order {
         self::bootKernel();
 
         $repository = self::$container->get(OrderRepository::class);

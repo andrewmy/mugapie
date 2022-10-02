@@ -10,13 +10,9 @@ use App\Domain\Model\Product\Product;
 
 interface OrderRepository
 {
-    /**
-     * @throws OrderPersistenceFailed
-     */
-    public function save(Order $order) : void;
+    /** @throws OrderPersistenceFailed */
+    public function save(Order $order): void;
 
-    /**
-     * @return Order[]
-     */
-    public function findAllPendingHavingProduct(Product $product) : array;
+    /** @return Order[] */
+    public function findAllPendingHavingProduct(Product $product): array;
 }

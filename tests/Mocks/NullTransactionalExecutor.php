@@ -8,7 +8,7 @@ use App\Application\Interfaces\TransactionalExecutor;
 
 final class NullTransactionalExecutor implements TransactionalExecutor
 {
-    public function execute(callable $operation) : void
+    public function execute(callable $operation): void
     {
         $operation();
     }

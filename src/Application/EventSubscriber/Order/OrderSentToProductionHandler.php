@@ -36,12 +36,12 @@ final class OrderSentToProductionHandler implements EventSubscriberInterface
      *
      * @codeCoverageIgnore
      */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [OrderSentToProduction::class => 'handle'];
     }
 
-    public function handle(OrderSentToProduction $event) : void
+    public function handle(OrderSentToProduction $event): void
     {
         try {
             $transaction = $this->transactionFactory->createForOrder(

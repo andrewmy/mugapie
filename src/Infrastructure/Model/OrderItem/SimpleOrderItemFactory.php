@@ -15,7 +15,7 @@ use Throwable;
 
 class SimpleOrderItemFactory implements OrderItemFactory
 {
-    public function create(Order $order, CreateOrderItem $data) : OrderItem
+    public function create(Order $order, CreateOrderItem $data): OrderItem
     {
         try {
             return OrderItem::create(

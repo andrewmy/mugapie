@@ -27,15 +27,15 @@ use Ramsey\Uuid\Uuid;
 
 final class OrderInputTransformerTest extends TestCase
 {
-    public function testTransformPostWorld() : void
+    public function testTransformPostWorld(): void
     {
         $transformer = new OrderInputTransformer(
             Mockery::mock(
                 ValidatorInterface::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('validate')
                         ->once()
-                        ->withArgs(static function (OrderInput $input, array $context) : bool {
+                        ->withArgs(static function (OrderInput $input, array $context): bool {
                             return ($context['groups'] ?? null) === 'post_world'
                                 && $input->countryCode === 'LV';
                         });
@@ -43,11 +43,11 @@ final class OrderInputTransformerTest extends TestCase
             ),
             Mockery::mock(
                 OrderCostCalculator::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('calculate')
                         ->once()
                         ->andReturn(new Money(100, new Currency('USD')));
-                }
+                },
             ),
             new SimpleOrderItemFactory(),
         );
@@ -76,15 +76,15 @@ final class OrderInputTransformerTest extends TestCase
         $transformer->transform($input, Order::class);
     }
 
-    public function testTransformPutWorld() : void
+    public function testTransformPutWorld(): void
     {
         $transformer = new OrderInputTransformer(
             Mockery::mock(
                 ValidatorInterface::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('validate')
                         ->once()
-                        ->withArgs(static function (OrderInput $input, array $context) : bool {
+                        ->withArgs(static function (OrderInput $input, array $context): bool {
                             return ($context['groups'] ?? null) === 'put_world'
                                 && $input->countryCode === 'LV';
                         });
@@ -92,11 +92,11 @@ final class OrderInputTransformerTest extends TestCase
             ),
             Mockery::mock(
                 OrderCostCalculator::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('calculate')
                         ->once()
                         ->andReturn(new Money(100, new Currency('USD')));
-                }
+                },
             ),
             new SimpleOrderItemFactory(),
         );

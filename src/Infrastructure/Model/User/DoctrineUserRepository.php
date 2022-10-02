@@ -20,7 +20,7 @@ final class DoctrineUserRepository implements UserRepository
         $this->entityManager = $entityManager;
     }
 
-    public function save(User $user) : void
+    public function save(User $user): void
     {
         try {
             $this->entityManager->persist($user);
@@ -30,7 +30,7 @@ final class DoctrineUserRepository implements UserRepository
         }
     }
 
-    public function delete(User $user) : void
+    public function delete(User $user): void
     {
         try {
             $this->entityManager->remove($user);

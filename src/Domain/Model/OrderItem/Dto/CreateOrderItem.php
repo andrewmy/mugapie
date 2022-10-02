@@ -21,12 +21,12 @@ final class CreateOrderItem implements ProductUnits
         $this->units   = $units;
     }
 
-    public function product() : Product
+    public function product(): Product
     {
         return $this->product;
     }
 
-    public function units() : int
+    public function units(): int
     {
         return $this->units;
     }

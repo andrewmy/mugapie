@@ -8,21 +8,20 @@ use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+
 use function dirname;
 
 final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public function getProjectDir() : string
+    public function getProjectDir(): string
     {
         return dirname(__DIR__) . '/..';
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
-    protected function configureContainer(ContainerConfigurator $container) : void
+    /** @codeCoverageIgnore */
+    protected function configureContainer(ContainerConfigurator $container): void
     {
         $confDir = $this->getProjectDir() . '/config';
 
@@ -33,10 +32,8 @@ final class Kernel extends BaseKernel
         $container->import($confDir . '/{services}_' . $this->getEnvironment() . '.yaml');
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
-    protected function configureRoutes(RoutingConfigurator $routes) : void
+    /** @codeCoverageIgnore */
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $confDir = $this->getProjectDir() . '/config';
 

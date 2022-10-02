@@ -20,7 +20,7 @@ final class DoctrineProductRepository implements ProductRepository
         $this->entityManager = $entityManager;
     }
 
-    public function save(Product $product) : void
+    public function save(Product $product): void
     {
         try {
             $this->entityManager->persist($product);
@@ -30,7 +30,7 @@ final class DoctrineProductRepository implements ProductRepository
         }
     }
 
-    public function delete(Product $product) : void
+    public function delete(Product $product): void
     {
         try {
             $this->entityManager->remove($product);

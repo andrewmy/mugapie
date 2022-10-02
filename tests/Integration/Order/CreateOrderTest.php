@@ -8,7 +8,7 @@ use App\Tests\Integration\IntegrationTestCase;
 
 final class CreateOrderTest extends IntegrationTestCase
 {
-    public function testCreateSuccess() : void
+    public function testCreateSuccess(): void
     {
         $user1 = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
         $user2 = $this->createUser('4c583fde-4a71-47b2-923e-f53d36f5a6bb');
@@ -54,7 +54,7 @@ final class CreateOrderTest extends IntegrationTestCase
         ]);
     }
 
-    public function testCreateWithForeignProductsFails() : void
+    public function testCreateWithForeignProductsFails(): void
     {
         $user1 = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
         $user2 = $this->createUser('4c583fde-4a71-47b2-923e-f53d36f5a6bb');
@@ -84,7 +84,7 @@ final class CreateOrderTest extends IntegrationTestCase
         self::assertJsonContains(['detail' => 'Cannot proceed with order, it contains products from another user: 060fbebc-4e39-4eea-a161-784baff24f7e']);
     }
 
-    public function testCreateTooMuchFails() : void
+    public function testCreateTooMuchFails(): void
     {
         $user1 = $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
 

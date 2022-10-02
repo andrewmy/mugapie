@@ -8,7 +8,7 @@ use App\Tests\Integration\IntegrationTestCase;
 
 final class UpdateUserTest extends IntegrationTestCase
 {
-    public function testUpdates() : void
+    public function testUpdates(): void
     {
         $this->createUser('99c01751-6d32-464a-9c18-6625856b9192');
 

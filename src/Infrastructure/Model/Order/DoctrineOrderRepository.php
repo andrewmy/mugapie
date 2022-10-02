@@ -22,7 +22,7 @@ final class DoctrineOrderRepository implements OrderRepository
         $this->entityManager = $entityManager;
     }
 
-    public function save(Order $order) : void
+    public function save(Order $order): void
     {
         try {
             $this->entityManager->persist($order);
@@ -37,10 +37,8 @@ final class DoctrineOrderRepository implements OrderRepository
         }
     }
 
-    /**
-     * @return Order[]
-     */
-    public function findAllPendingHavingProduct(Product $product) : array
+    /** @return Order[] */
+    public function findAllPendingHavingProduct(Product $product): array
     {
         /** @var Order[] $result */
         $result = $this->entityManager->createQueryBuilder()
