@@ -14,7 +14,7 @@ final class UserInput
     /** @var string|null */
     public ?string $nickname;
 
-    public function toDomainCreate(string $currency) : CreateUser
+    public function toDomainCreate(string $currency): CreateUser
     {
         return new CreateUser(
             $this->nickname,
@@ -22,7 +22,7 @@ final class UserInput
         );
     }
 
-    public function toDomainUpdate() : UpdateUser
+    public function toDomainUpdate(): UpdateUser
     {
         return new UpdateUser($this->nickname);
     }

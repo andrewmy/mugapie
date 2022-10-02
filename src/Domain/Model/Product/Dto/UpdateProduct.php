@@ -29,22 +29,22 @@ final class UpdateProduct
         $this->cost  = $cost;
     }
 
-    public function type() : ProductType
+    public function type(): ProductType
     {
         return $this->type;
     }
 
-    public function title() : string
+    public function title(): string
     {
         return $this->title;
     }
 
-    public function sku() : string
+    public function sku(): string
     {
         return $this->sku;
     }
 
-    public function cost() : Money
+    public function cost(): Money
     {
         return $this->cost;
     }

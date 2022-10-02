@@ -20,7 +20,7 @@ use Ramsey\Uuid\Uuid;
 
 class DoctrineUserRepositoryTest extends TestCase
 {
-    private static function user() : User
+    private static function user(): User
     {
         return User::create(
             new UserId(Uuid::uuid4()),
@@ -31,43 +31,43 @@ class DoctrineUserRepositoryTest extends TestCase
         );
     }
 
-    public function testSaveFailed() : void
+    public function testSaveFailed(): void
     {
         $repository = new DoctrineUserRepository(
             Mockery::mock(
                 EntityManagerInterface::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('persist')
                         ->andThrow(EntityManagerClosed::create());
-                }
+                },
             ),
         );
 
         $this->expectException(UserPersistenceFailed::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
-            'User save failed: The EntityManager is closed.'
+            'User save failed: The EntityManager is closed.',
         );
 
         $repository->save(self::user());
     }
 
-    public function testDeleteFailed() : void
+    public function testDeleteFailed(): void
     {
         $repository = new DoctrineUserRepository(
             Mockery::mock(
                 EntityManagerInterface::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('remove')
                         ->andThrow(EntityManagerClosed::create());
-                }
+                },
             ),
         );
 
         $this->expectException(UserPersistenceFailed::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
-            'User delete failed: The EntityManager is closed.'
+            'User delete failed: The EntityManager is closed.',
         );
 
         $repository->delete(self::user());

@@ -6,8 +6,6 @@ namespace App\Domain\Model\Common\Interfaces;
 
 interface RecordsEvents
 {
-    /**
-     * @return Event[]
-     */
-    public function popEvents() : array;
+    /** @return Event[] */
+    public function popEvents(): array;
 }

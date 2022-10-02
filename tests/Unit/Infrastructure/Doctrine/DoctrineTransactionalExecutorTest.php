@@ -12,15 +12,15 @@ use PHPUnit\Framework\TestCase;
 
 final class DoctrineTransactionalExecutorTest extends TestCase
 {
-    public function testExecute() : void
+    public function testExecute(): void
     {
         $executor = new DoctrineTransactionalExecutor(
             Mockery::mock(
                 EntityManagerInterface::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('wrapInTransaction')
                         ->once()
-                        ->andReturnUsing(static function (callable $operation) : void {
+                        ->andReturnUsing(static function (callable $operation): void {
                             $operation();
                         });
                 },
@@ -28,7 +28,7 @@ final class DoctrineTransactionalExecutorTest extends TestCase
         );
 
         $var = 1;
-        $executor->execute(static function () use (&$var) : void {
+        $executor->execute(static function () use (&$var): void {
             $var = 2;
         });
 

@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+
 use function assert;
 use function class_exists;
 use function count;
@@ -31,22 +32,22 @@ final class UniqueEntityDtoValidator extends ConstraintValidator
     }
 
     /**
-     * @param mixed      $dto
+     * @param mixed      $value
      * @param Constraint $constraint
      */
-    public function validate($dto, Constraint $constraint) : void
+    public function validate($value, Constraint $constraint): void
     {
         if (! $constraint instanceof UniqueEntityDto) {
             throw new UnexpectedTypeException($constraint, UniqueEntityDto::class);
         }
 
-        if ($dto === null) {
+        if ($value === null) {
             return;
         }
 
-        assert(is_object($dto));
+        assert(is_object($value));
 
-        if (! property_exists($dto, $constraint->field)) {
+        if (! property_exists($value, $constraint->field)) {
             throw new ConstraintDefinitionException('Specify a valid readable field.');
         }
 
@@ -54,13 +55,13 @@ final class UniqueEntityDtoValidator extends ConstraintValidator
             throw new ConstraintDefinitionException('Specify a valid entity class.');
         }
 
-        if (! property_exists($dto, $constraint->referenceEntityField)) {
+        if (! property_exists($value, $constraint->referenceEntityField)) {
             throw new ConstraintDefinitionException(
                 'Specify a valid reference entity field.',
             );
         }
 
-        $reference = $dto->{$constraint->referenceEntityField};
+        $reference = $value->{$constraint->referenceEntityField};
 
         $classMeta = $this->entityManager->getClassMetadata($constraint->entityClass);
 
@@ -70,19 +71,20 @@ final class UniqueEntityDtoValidator extends ConstraintValidator
             throw new ConstraintDefinitionException(
                 sprintf(
                     'The field "%s" is not mapped by Doctrine, so it cannot be validated for uniqueness.',
-                    $constraint->field
+                    $constraint->field,
                 ),
             );
         }
 
-        $criteria[$constraint->field] = $dto->{$constraint->field};
+        $criteria[$constraint->field] = $value->{$constraint->field};
 
         /** @var object[] $result */
         $result = $this->entityManager
             ->getRepository($constraint->entityClass)
             ->findBy($criteria);
 
-        if (count($result) === 0 ||
+        if (
+            count($result) === 0 ||
             (count($result) === 1 && $result[0] === $reference)
         ) {
             return;

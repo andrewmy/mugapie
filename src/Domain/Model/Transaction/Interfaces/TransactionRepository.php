@@ -9,8 +9,6 @@ use App\Domain\Model\Transaction\Transaction;
 
 interface TransactionRepository
 {
-    /**
-     * @throws TransactionPersistenceFailed
-     */
-    public function save(Transaction $transaction) : void;
+    /** @throws TransactionPersistenceFailed */
+    public function save(Transaction $transaction): void;
 }

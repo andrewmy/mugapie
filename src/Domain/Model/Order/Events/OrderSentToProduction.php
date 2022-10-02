@@ -16,7 +16,7 @@ final class OrderSentToProduction implements Event
         $this->order = $order;
     }
 
-    public function order() : Order
+    public function order(): Order
     {
         return $this->order;
     }

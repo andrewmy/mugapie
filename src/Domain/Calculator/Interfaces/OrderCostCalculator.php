@@ -21,5 +21,5 @@ interface OrderCostCalculator
         ShippingType $shippingType,
         ShippingAddress $address,
         array $items
-    ) : Money;
+    ): Money;
 }

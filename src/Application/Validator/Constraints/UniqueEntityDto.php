@@ -6,9 +6,7 @@ namespace App\Application\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @Annotation
- */
+/** @Annotation */
 final class UniqueEntityDto extends Constraint
 {
     public string $message = 'This value is already used.';
@@ -19,15 +17,13 @@ final class UniqueEntityDto extends Constraint
 
     public string $field = '';
 
-    public function validatedBy() : string
+    public function validatedBy(): string
     {
         return UniqueEntityDtoValidator::class;
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
-    public function getTargets() : string
+    /** @codeCoverageIgnore */
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
@@ -37,7 +33,7 @@ final class UniqueEntityDto extends Constraint
      *
      * @codeCoverageIgnore
      */
-    public function getRequiredOptions() : array
+    public function getRequiredOptions(): array
     {
         return ['field', 'entityClass', 'referenceEntityField'];
     }

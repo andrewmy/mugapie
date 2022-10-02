@@ -6,5 +6,5 @@ namespace App\Application\Interfaces;
 
 interface TransactionalExecutor
 {
-    public function execute(callable $operation) : void;
+    public function execute(callable $operation): void;
 }

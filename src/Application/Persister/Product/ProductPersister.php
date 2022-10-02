@@ -11,6 +11,7 @@ use App\Domain\Model\Order\Exceptions\OrderPersistenceFailed;
 use App\Domain\Model\Product\Exceptions\ProductPersistenceFailed;
 use App\Domain\Model\Product\Interfaces\ProductRepository;
 use App\Domain\Model\Product\Product;
+
 use function assert;
 
 final class ProductPersister implements DataPersisterInterface
@@ -27,23 +28,19 @@ final class ProductPersister implements DataPersisterInterface
         $this->transactionalExecutor = $transactionalExecutor;
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function supports($data) : bool
+    /** @param mixed $data */
+    public function supports($data): bool
     {
         return $data instanceof Product;
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function persist($data) : Product
+    /** @param mixed $data */
+    public function persist($data): Product
     {
         assert($data instanceof Product);
 
         try {
-            $this->transactionalExecutor->execute(function () use ($data) : void {
+            $this->transactionalExecutor->execute(function () use ($data): void {
                 $this->productRepository->save($data);
             });
         } catch (ProductPersistenceFailed | OrderPersistenceFailed $exception) {
@@ -53,10 +50,8 @@ final class ProductPersister implements DataPersisterInterface
         return $data;
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function remove($data) : void
+    /** @param mixed $data */
+    public function remove($data): void
     {
         assert($data instanceof Product);
 

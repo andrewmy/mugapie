@@ -16,11 +16,10 @@ use Doctrine\Persistence\ObjectManager;
 use Money\Currency;
 use Money\Money;
 use Ramsey\Uuid\Uuid;
+
 use function assert;
 
-/**
- * @codeCoverageIgnore
- */
+/** @codeCoverageIgnore */
 final class ProductFixture extends Fixture implements DependentFixtureInterface
 {
     private Currency $currency;
@@ -30,15 +29,13 @@ final class ProductFixture extends Fixture implements DependentFixtureInterface
         $this->currency = new Currency($currency);
     }
 
-    /**
-     * @return array<class-string<FixtureInterface>>
-     */
-    public function getDependencies() : array
+    /** @return array<class-string<FixtureInterface>> */
+    public function getDependencies(): array
     {
         return [UserFixture::class];
     }
 
-    public function load(ObjectManager $manager) : void
+    public function load(ObjectManager $manager): void
     {
         $list = [
             [

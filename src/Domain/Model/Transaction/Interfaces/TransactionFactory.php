@@ -12,13 +12,9 @@ use Money\Money;
 
 interface TransactionFactory
 {
-    /**
-     * @throws TransactionCreationFailed
-     */
-    public function createForUser(User $user, Money $amount) : Transaction;
+    /** @throws TransactionCreationFailed */
+    public function createForUser(User $user, Money $amount): Transaction;
 
-    /**
-     * @throws TransactionCreationFailed
-     */
-    public function createForOrder(Order $order, Money $amount) : Transaction;
+    /** @throws TransactionCreationFailed */
+    public function createForOrder(Order $order, Money $amount): Transaction;
 }

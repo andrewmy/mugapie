@@ -22,22 +22,22 @@ use Ramsey\Uuid\Uuid;
 
 final class DoctrineTransactionRepositoryTest extends TestCase
 {
-    public function testSaveFailed() : void
+    public function testSaveFailed(): void
     {
         $repository = new DoctrineTransactionRepository(
             Mockery::mock(
                 EntityManagerInterface::class,
-                static function (MockInterface $mock) : void {
+                static function (MockInterface $mock): void {
                     $mock->shouldReceive('persist')
                         ->andThrow(EntityManagerClosed::create());
-                }
+                },
             ),
         );
 
         $this->expectException(TransactionPersistenceFailed::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
-            'Transaction save failed: The EntityManager is closed.'
+            'Transaction save failed: The EntityManager is closed.',
         );
 
         $repository->save(

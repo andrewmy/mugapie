@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ConfigOrderCostCalculatorTest extends TestCase
 {
-    public function testCalculateFails() : void
+    public function testCalculateFails(): void
     {
         $calculator = new ConfigOrderCostCalculator([], 'USD');
 

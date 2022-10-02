@@ -28,12 +28,12 @@ final class TransactionCreatedHandler implements EventSubscriberInterface
      *
      * @codeCoverageIgnore
      */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [TransactionCreated::class => 'handle'];
     }
 
-    public function handle(TransactionCreated $event) : void
+    public function handle(TransactionCreated $event): void
     {
         $transaction = $event->transaction();
         $user        = $transaction->user();

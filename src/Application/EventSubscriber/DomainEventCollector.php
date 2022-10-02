@@ -14,6 +14,7 @@ use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+
 use function assert;
 use function class_implements;
 use function in_array;
@@ -32,10 +33,8 @@ final class DomainEventCollector implements EventSubscriber
         $this->dispatcher = $dispatcher;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getSubscribedEvents() : array
+    /** @return string[] */
+    public function getSubscribedEvents(): array
     {
         return [
             Events::prePersist,
@@ -46,34 +45,26 @@ final class DomainEventCollector implements EventSubscriber
         ];
     }
 
-    /**
-     * @param LifecycleEventArgs<EntityManager> $event
-     */
-    public function prePersist(LifecycleEventArgs $event) : void
+    /** @param LifecycleEventArgs<EntityManager> $event */
+    public function prePersist(LifecycleEventArgs $event): void
     {
         $this->collect($event);
     }
 
-    /**
-     * @param LifecycleEventArgs<EntityManager> $event
-     */
-    public function preUpdate(LifecycleEventArgs $event) : void
+    /** @param LifecycleEventArgs<EntityManager> $event */
+    public function preUpdate(LifecycleEventArgs $event): void
     {
         $this->collect($event);
     }
 
-    /**
-     * @param LifecycleEventArgs<EntityManager> $event
-     */
-    public function preRemove(LifecycleEventArgs $event) : void
+    /** @param LifecycleEventArgs<EntityManager> $event */
+    public function preRemove(LifecycleEventArgs $event): void
     {
         $this->collect($event);
     }
 
-    /**
-     * @param LifecycleEventArgs<EntityManager> $event
-     */
-    private function collect(LifecycleEventArgs $event) : void
+    /** @param LifecycleEventArgs<EntityManager> $event */
+    private function collect(LifecycleEventArgs $event): void
     {
         $entity = $event->getObject();
 
@@ -84,9 +75,9 @@ final class DomainEventCollector implements EventSubscriber
         $this->entities->add($entity);
     }
 
-    public function preFlush(PreFlushEventArgs $args) : void
+    public function preFlush(PreFlushEventArgs $args): void
     {
-        $unitOfWork = $args->getEntityManager()->getUnitOfWork();
+        $unitOfWork = $args->getObjectManager()->getUnitOfWork();
         foreach ($unitOfWork->getIdentityMap() as $class => $entities) {
             if (! in_array(RecordsEvents::class, (array) class_implements($class), true)) {
                 continue;
@@ -99,7 +90,7 @@ final class DomainEventCollector implements EventSubscriber
         }
     }
 
-    public function postFlush() : void
+    public function postFlush(): void
     {
         /** @var Collection<int, Event> $events */
         $events = new ArrayCollection();

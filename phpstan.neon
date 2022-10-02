@@ -34,3 +34,15 @@ parameters:
         -
             message: "~Cannot access offset 'class' on mixed~"
             path: src/Application/Transformer/User/UserInputTransformer.php
+        -
+            message: '~Call to deprecated method assertArraySubset~'
+            path: tests/Integration/Order/GetOrderIndexTest.php
+        -
+            message: '~Call to deprecated method assertArraySubset~'
+            path: tests/Integration/Order/GetOrderItemIndexTest.php
+        -
+            message: '~Call to deprecated method assertArraySubset~'
+            path: tests/Integration/Product/GetProductIndexTest.php
+        -
+            message: '~Call to deprecated method assertArraySubset~'
+            path: tests/Integration/User/GetUserIndexTest.php

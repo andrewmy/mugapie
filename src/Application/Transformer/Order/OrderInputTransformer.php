@@ -19,6 +19,7 @@ use App\Domain\Model\OrderItem\Exceptions\OrderItemCreationFailed;
 use App\Domain\Model\OrderItem\Interfaces\OrderItemFactory;
 use App\Domain\Model\User\User;
 use Ramsey\Uuid\Uuid;
+
 use function assert;
 use function count;
 
@@ -45,7 +46,7 @@ final class OrderInputTransformer implements DataTransformerInterface
      * @param string       $to
      * @param array<mixed> $context
      */
-    public function transform($object, string $to, array $context = []) : Order
+    public function transform($object, string $to, array $context = []): Order
     {
         assert($object instanceof OrderInput);
 
@@ -67,7 +68,7 @@ final class OrderInputTransformer implements DataTransformerInterface
      * @param string              $to
      * @param array<mixed>        $context
      */
-    public function supportsTransformation($data, string $to, array $context = []) : bool
+    public function supportsTransformation($data, string $to, array $context = []): bool
     {
         if ($data instanceof Order) {
             return false;
@@ -76,7 +77,7 @@ final class OrderInputTransformer implements DataTransformerInterface
         return $to === Order::class && ($context['input']['class'] ?? null) !== null;
     }
 
-    private function transformToUpdated(OrderInput $object, Order $order) : Order
+    private function transformToUpdated(OrderInput $object, Order $order): Order
     {
         $this->validator->validate(
             $object,
@@ -125,7 +126,7 @@ final class OrderInputTransformer implements DataTransformerInterface
         return $order;
     }
 
-    private function transformToCreated(OrderInput $object) : Order
+    private function transformToCreated(OrderInput $object): Order
     {
         $this->validator->validate(
             $object,
@@ -133,7 +134,7 @@ final class OrderInputTransformer implements DataTransformerInterface
                 'groups' => ShippingAddress::isDomesticCountry($object->countryCode)
                     ? 'post_home'
                     : 'post_world',
-            ]
+            ],
         );
 
         $user = $object->user;
@@ -171,7 +172,7 @@ final class OrderInputTransformer implements DataTransformerInterface
         return $order;
     }
 
-    private function checkForForeignProducts(OrderInput $input, User $user) : void
+    private function checkForForeignProducts(OrderInput $input, User $user): void
     {
         $foreignProducts = [];
         foreach ($input->items as $item) {

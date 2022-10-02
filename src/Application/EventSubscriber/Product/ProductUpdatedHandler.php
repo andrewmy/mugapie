@@ -44,18 +44,18 @@ final class ProductUpdatedHandler implements EventSubscriberInterface
      *
      * @codeCoverageIgnore
      */
-    public static function getSubscribedEvents() : array
+    public static function getSubscribedEvents(): array
     {
         return [ProductUpdated::class => 'handle'];
     }
 
-    public function handle(ProductUpdated $event) : void
+    public function handle(ProductUpdated $event): void
     {
         $product = $event->product();
         $orders  = $this->orderRepository->findAllPendingHavingProduct($product);
         foreach ($orders as $order) {
             $oldItem = $order->items()->filter(
-                static function (OrderItem $item) use ($product) : bool {
+                static function (OrderItem $item) use ($product): bool {
                     return $item->product() === $product;
                 },
             )->first();
