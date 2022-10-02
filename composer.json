@@ -62,10 +62,10 @@
         "roave/security-advisories": "dev-master",
         "rregeer/phpunit-coverage-check": "^0.3.1",
         "sensiolabs-de/deptrac-shim": "^0.6.0",
-        "sensiolabs/security-checker": "^6.0",
         "symfony/browser-kit": "5.0.*",
         "symfony/http-client": "5.0.*",
         "symfony/phpunit-bridge": "^5.0",
+        "thibautselingue/local-php-security-checker-installer": "^1.0",
         "vimeo/psalm": "^3.8"
     },
     "config": {
@@ -96,8 +96,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "security-checker security:check": "script"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
