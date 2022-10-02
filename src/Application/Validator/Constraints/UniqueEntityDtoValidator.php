@@ -10,8 +10,10 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use function assert;
 use function class_exists;
 use function count;
+use function is_object;
 use function property_exists;
 use function sprintf;
 
@@ -41,6 +43,8 @@ final class UniqueEntityDtoValidator extends ConstraintValidator
         if ($dto === null) {
             return;
         }
+
+        assert(is_object($dto));
 
         if (! property_exists($dto, $constraint->field)) {
             throw new ConstraintDefinitionException('Specify a valid readable field.');

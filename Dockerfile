@@ -1,4 +1,5 @@
-FROM php:7.4-fpm-alpine as app
+# last version to have phpdbg enabled
+FROM php:7.4.27-fpm-alpine as app
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 

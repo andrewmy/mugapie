@@ -1,31 +1,32 @@
-paths:
-  - ./src
-exclude_files:
-  - .*test.*
-layers:
-  - name: Application
-    collectors:
-      - type: className
-        regex: .*App\\Application\\.*
-  - name: Domain
-    collectors:
-      - type: className
-        regex: .*App\\Domain\\.*
-  - name: Infrastructure
-    collectors:
-      - type: className
-        regex: .*App\\Infrastructure\\.*
-  - name: Ui
-    collectors:
-      - type: className
-        regex: .*App\\Ui\\.*
-ruleset:
-  Ui:
-    - Application
-    - Domain
-  Application:
-    - Domain
-  Infrastructure:
-    - Domain
-    - Application
-  Domain: ~
+deptrac:
+  paths:
+    - ./src
+  exclude_files:
+    - .*test.*
+  layers:
+    - name: Application
+      collectors:
+        - type: className
+          regex: .*App\\Application\\.*
+    - name: Domain
+      collectors:
+        - type: className
+          regex: .*App\\Domain\\.*
+    - name: Infrastructure
+      collectors:
+        - type: className
+          regex: .*App\\Infrastructure\\.*
+    - name: Ui
+      collectors:
+        - type: className
+          regex: .*App\\Ui\\.*
+  ruleset:
+    Ui:
+      - Application
+      - Domain
+    Application:
+      - Domain
+    Infrastructure:
+      - Domain
+      - Application
+    Domain: ~

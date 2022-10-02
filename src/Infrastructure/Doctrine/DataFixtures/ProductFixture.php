@@ -11,6 +11,7 @@ use App\Domain\Model\Product\ProductType;
 use App\Domain\Model\User\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Money\Currency;
 use Money\Money;
@@ -30,7 +31,7 @@ final class ProductFixture extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * @return array<class-string>
+     * @return array<class-string<FixtureInterface>>
      */
     public function getDependencies() : array
     {

@@ -14,7 +14,7 @@ use App\Domain\Model\User\User;
 use App\Domain\Model\User\UserId;
 use App\Infrastructure\Model\Product\DoctrineProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\EntityManagerClosed;
 use Mockery;
 use Mockery\MockInterface;
 use Money\Currency;
@@ -51,7 +51,7 @@ final class DoctrineProductRepositoryTest extends TestCase
                 EntityManagerInterface::class,
                 static function (MockInterface $mock) : void {
                     $mock->shouldReceive('persist')
-                        ->andThrow(ORMException::entityManagerClosed());
+                        ->andThrow(EntityManagerClosed::create());
                 }
             ),
         );
@@ -72,7 +72,7 @@ final class DoctrineProductRepositoryTest extends TestCase
                 EntityManagerInterface::class,
                 static function (MockInterface $mock) : void {
                     $mock->shouldReceive('remove')
-                        ->andThrow(ORMException::entityManagerClosed());
+                        ->andThrow(EntityManagerClosed::create());
                 }
             ),
         );

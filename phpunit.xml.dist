@@ -14,6 +14,7 @@
         <env force="true" name="APP_DEBUG" value="false" />
         <env force="true" name="APP_SECRET" value="s$cretf0rt3st" />
         <env force="true" name="SHELL_VERBOSITY" value="-1" />
+        <env force="true" name="SYMFONY_DEPRECATIONS_HELPER" value="max[total]=999999"/>
 
         <env force="true" name="CORS_ALLOW_ORIGIN" value="^https?://localhost(:[0-9]+)?$"/>
 

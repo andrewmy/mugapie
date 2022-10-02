@@ -36,7 +36,7 @@ final class CreateProductTest extends IntegrationTestCase
             'cost' => 1234,
         ]);
 
-        self::assertResponseStatusCodeSame(400);
+        self::assertResponseStatusCodeSame(422);
         self::assertJsonContains(['detail' => 'sku: This value is already used.']);
     }
 }

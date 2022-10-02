@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Transformer\Order;
 
 use ApiPlatform\Core\Serializer\AbstractItemNormalizer;
-use ApiPlatform\Core\Validator\ValidatorInterface;
+use ApiPlatform\Validator\ValidatorInterface;
 use App\Application\Dto\Order\OrderInput;
 use App\Application\Transformer\Order\OrderInputTransformer;
 use App\Domain\Calculator\Interfaces\OrderCostCalculator;

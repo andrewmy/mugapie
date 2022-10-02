@@ -1,7 +1,7 @@
 ci: composer-validate cbf cs require-check unused-check security-check test stan mutate deptrac
 
 deptrac:
-	php vendor/bin/deptrac
+	php vendor/bin/deptrac analyse --config-file=depfile.yml
 
 composer-validate:
 	composer validate

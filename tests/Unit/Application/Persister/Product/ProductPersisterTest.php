@@ -16,7 +16,7 @@ use App\Domain\Model\User\Dto\CreateUser;
 use App\Domain\Model\User\User;
 use App\Domain\Model\User\UserId;
 use App\Tests\Mocks\NullTransactionalExecutor;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\EntityManagerClosed;
 use Mockery;
 use Mockery\MockInterface;
 use Money\Currency;
@@ -39,7 +39,7 @@ class ProductPersisterTest extends TestCase
                         })
                         ->andThrow(
                             ProductPersistenceFailed::saveFailed(
-                                ORMException::entityManagerClosed(),
+                                EntityManagerClosed::create(),
                             ),
                         );
                 }

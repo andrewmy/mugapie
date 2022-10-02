@@ -9,10 +9,28 @@ parameters:
     paths:
         - src
         - tests
-    excludes_analyse:
+    excludePaths:
         - src/Infrastructure/Doctrine/Migrations
     tmpDir: var/phpstan
     ignoreErrors:
         -
-            message: '~Variable property access on mixed.~'
+            message: '~Variable property access on object.~'
             path: src/Application/Validator/Constraints/UniqueEntityDtoValidator.php
+        -
+            message: '~is never written, only read~'
+            path: src/Domain/Model/OrderItem/OrderItem.php
+        -
+            message: '~is never written, only read~'
+            path: src/Domain/Model/Product/Product.php
+        -
+            message: '~is never written, only read~'
+            path: src/Domain/Model/Transaction/Transaction.php
+        -
+            message: "~Cannot access offset 'class' on mixed~"
+            path: src/Application/Transformer/Order/OrderInputTransformer.php
+        -
+            message: "~Cannot access offset 'class' on mixed~"
+            path: src/Application/Transformer/Product/ProductInputTransformer.php
+        -
+            message: "~Cannot access offset 'class' on mixed~"
+            path: src/Application/Transformer/User/UserInputTransformer.php

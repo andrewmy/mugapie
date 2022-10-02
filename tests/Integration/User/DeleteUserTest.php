@@ -6,6 +6,7 @@ namespace App\Tests\Integration\User;
 
 use App\Tests\Integration\IntegrationTestCase;
 use function assert;
+use function is_array;
 use function json_decode;
 use const JSON_THROW_ON_ERROR;
 
@@ -35,6 +36,7 @@ final class DeleteUserTest extends IntegrationTestCase
         $response = $client->getResponse();
         assert($response !== null);
         $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+        assert(is_array($data));
 
         self::assertCount(0, $data);
     }
