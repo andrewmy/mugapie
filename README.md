@@ -7,7 +7,7 @@ This is a sample JSON REST API project implemented using [API Platform](https://
 
 ## Running
 
-1. `docker-compose up` — containers with all the dev dependencies.
+1. `docker compose up` — containers with all the dev dependencies.
 2. Visit http://127.0.0.1:1080/api/docs for API documentation
 
 ### Docker-sync for some dev performance improvement
@@ -19,7 +19,7 @@ This is a sample JSON REST API project implemented using [API Platform](https://
 
 ## Preparing data from CLI
 
-`docker-compose exec php_app ./bin/console doctrine:fixtures:load -n`
+`docker compose exec php_app ./bin/console doctrine:fixtures:load -n`
 
 ## API
 
@@ -43,7 +43,7 @@ All the endpoints are available without authentication, yolo.
 - `DELETE /api/users/{id}`
 
 Some dummy data to play around:
-`docker-compose exec php_app bin/console doctrine:fixtures:load -n`
+`docker compose exec php_app bin/console doctrine:fixtures:load -n`
 
 There's also a Postman collection in the box.
 
@@ -59,9 +59,9 @@ There's also a Postman collection in the box.
 
 ## Testing and quality
 
-- Testing: `docker-compose exec php_app make test`
-- Static analysis (PHPStan + Psalm): `docker-compose exec php_app make stan`
-- All the things: `docker-compose exec php_app make ci`
+- Testing: `docker compose exec php_app make test`
+- Static analysis (PHPStan + Psalm): `docker compose exec php_app make stan`
+- All the things: `docker compose exec php_app make ci`
 
 ## Going live
 
