@@ -62,7 +62,7 @@ abstract class IntegrationTestCase extends ApiTestCase
     protected function createUser(string $id): User
     {
         self::bootKernel();
-        $repository = self::$container->get(UserRepository::class);
+        $repository = static::getContainer()->get(UserRepository::class);
         assert($repository instanceof UserRepository);
         $user = User::create(
             new UserId(Uuid::fromString($id)),
@@ -78,7 +78,7 @@ abstract class IntegrationTestCase extends ApiTestCase
 
     private function getManagedUser(UserId $id): User
     {
-        $em = self::$container->get(EntityManagerInterface::class);
+        $em = static::getContainer()->get(EntityManagerInterface::class);
         assert($em instanceof EntityManagerInterface);
 
         $result = $em->createQueryBuilder()
@@ -97,10 +97,10 @@ abstract class IntegrationTestCase extends ApiTestCase
     {
         self::bootKernel();
 
-        $repository = self::$container->get(ProductRepository::class);
+        $repository = static::getContainer()->get(ProductRepository::class);
         assert($repository instanceof ProductRepository);
 
-        $em = self::$container->get(EntityManagerInterface::class);
+        $em = static::getContainer()->get(EntityManagerInterface::class);
         assert($em instanceof EntityManagerInterface);
 
         $userManaged = $this->getManagedUser($user->id());
@@ -122,7 +122,7 @@ abstract class IntegrationTestCase extends ApiTestCase
 
     private function getManagedProduct(ProductId $id): Product
     {
-        $em = self::$container->get(EntityManagerInterface::class);
+        $em = static::getContainer()->get(EntityManagerInterface::class);
         assert($em instanceof EntityManagerInterface);
 
         $result = $em->createQueryBuilder()
@@ -145,10 +145,10 @@ abstract class IntegrationTestCase extends ApiTestCase
     ): Order {
         self::bootKernel();
 
-        $repository = self::$container->get(OrderRepository::class);
+        $repository = static::getContainer()->get(OrderRepository::class);
         assert($repository instanceof OrderRepository);
 
-        $em = self::$container->get(EntityManagerInterface::class);
+        $em = static::getContainer()->get(EntityManagerInterface::class);
         assert($em instanceof EntityManagerInterface);
 
         $userManaged = $this->getManagedUser($user->id());

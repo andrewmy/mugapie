@@ -13,14 +13,13 @@ unused-check:
 	php -dmemory_limit=4G vendor/bin/unused_scanner
 
 security-check:
-	vendor/bin/local-php-security-checker-installer
-	vendor/bin/local-php-security-checker
+	composer audit
 
 cbf:
-	php -dmemory_limit=4G vendor/bin/phpcbf
+	php -dmemory_limit=4G vendor/bin/phpcbf --standard=phpcs.xml
 
 cs:
-	php -dmemory_limit=4G vendor/bin/phpcs
+	php -dmemory_limit=4G vendor/bin/phpcs --standard=phpcs.xml
 
 stan:
 	php -dmemory_limit=4G vendor/bin/phpstan analyse && php vendor/bin/psalm --show-info=false
