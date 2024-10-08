@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Build and run Docker env
-        run: docker-compose up --build -d
+        run: docker compose up --build -d
 
       - name: Run tests
-        run: sleep 60 && docker-compose exec -T php_app make ci
+        run: sleep 60 && docker compose exec -T php_app make ci
