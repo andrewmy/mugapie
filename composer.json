@@ -66,7 +66,6 @@
         "symfony/browser-kit": "5.4.*",
         "symfony/http-client": "5.4.*",
         "symfony/phpunit-bridge": "^5.0",
-        "thibautselingue/local-php-security-checker-installer": "^1.0",
         "vimeo/psalm": "^4"
     },
     "config": {

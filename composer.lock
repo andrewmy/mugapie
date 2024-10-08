@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c3edc8c77503d43e6fda7a615ccf538",
+    "content-hash": "479d8756833f249f95f2bbe61066e2f1",
     "packages": [
         {
             "name": "api-platform/core",
@@ -11904,50 +11904,6 @@
                 }
             ],
             "time": "2024-03-03T12:36:25+00:00"
-        },
-        {
-            "name": "thibautselingue/local-php-security-checker-installer",
-            "version": "v1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thislg/local-php-security-checker-installer.git",
-                "reference": "acb86af4f2de9d6dda22261ae150d3eaf5b07262"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thislg/local-php-security-checker-installer/zipball/acb86af4f2de9d6dda22261ae150d3eaf5b07262",
-                "reference": "acb86af4f2de9d6dda22261ae150d3eaf5b07262",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "bin": [
-                "bin/local-php-security-checker-installer"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.0.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Thibaut Selingue",
-                    "email": "thibaut.selingue@gmail.com"
-                }
-            ],
-            "description": "Composer integration for local PHP security check",
-            "support": {
-                "issues": "https://github.com/thislg/local-php-security-checker-installer/issues",
-                "source": "https://github.com/thislg/local-php-security-checker-installer/tree/v1.0.4"
-            },
-            "abandoned": true,
-            "time": "2023-01-02T13:10:51+00:00"
         },
         {
             "name": "vimeo/psalm",
