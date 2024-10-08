@@ -23,7 +23,7 @@ class SendToProductionHandler
         $this->logger          = $logger;
     }
 
-    public function handle(Order $order) : Order
+    public function handle(Order $order): Order
     {
         if (! $order->isEditable()) {
             throw OrderOperationBadRequest::notEditable();

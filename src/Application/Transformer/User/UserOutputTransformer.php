@@ -7,6 +7,7 @@ namespace App\Application\Transformer\User;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use App\Application\Dto\User\UserOutput;
 use App\Domain\Model\User\User;
+
 use function assert;
 
 final class UserOutputTransformer implements DataTransformerInterface
@@ -16,7 +17,7 @@ final class UserOutputTransformer implements DataTransformerInterface
      * @param string       $to
      * @param array<mixed> $context
      */
-    public function transform($object, string $to, array $context = []) : UserOutput
+    public function transform($object, string $to, array $context = []): UserOutput
     {
         assert($object instanceof User);
 
@@ -35,7 +36,7 @@ final class UserOutputTransformer implements DataTransformerInterface
      * @param string              $to
      * @param array<mixed>        $context
      */
-    public function supportsTransformation($data, string $to, array $context = []) : bool
+    public function supportsTransformation($data, string $to, array $context = []): bool
     {
         return $to === UserOutput::class && $data instanceof User;
     }

@@ -11,10 +11,8 @@ trait EventRecorder
     /** @var Event[] */
     private array $events = [];
 
-    /**
-     * @return Event[]
-     */
-    public function popEvents() : array
+    /** @return Event[] */
+    public function popEvents(): array
     {
         $events = $this->events;
 
@@ -23,7 +21,7 @@ trait EventRecorder
         return $events;
     }
 
-    private function recordThat(Event $event) : void
+    private function recordThat(Event $event): void
     {
         $this->events[] = $event;
     }

@@ -98,7 +98,7 @@ final class ShippingAddress
         string $zip,
         string $phone,
         string $fullName
-    ) : self {
+    ): self {
         $obj              = new self();
         $obj->countryCode = self::DOMESTIC_COUNTRY;
         $obj->region      = $region;
@@ -119,7 +119,7 @@ final class ShippingAddress
         ?string $zip,
         string $phone,
         string $fullName
-    ) : self {
+    ): self {
         Assert::that($countryCode)->notSame(self::DOMESTIC_COUNTRY);
 
         $obj              = new self();
@@ -134,52 +134,52 @@ final class ShippingAddress
         return $obj;
     }
 
-    public static function isDomesticCountry(?string $countryCode) : bool
+    public static function isDomesticCountry(?string $countryCode): bool
     {
         return $countryCode === self::DOMESTIC_COUNTRY;
     }
 
-    public function isDomestic() : bool
+    public function isDomestic(): bool
     {
         return self::isDomesticCountry($this->countryCode());
     }
 
-    public function countryCode() : string
+    public function countryCode(): string
     {
         return $this->countryCode;
     }
 
-    public function region() : ?string
+    public function region(): ?string
     {
         return $this->region;
     }
 
-    public function city() : string
+    public function city(): string
     {
         return $this->city;
     }
 
-    public function street() : ?string
+    public function street(): ?string
     {
         return $this->street;
     }
 
-    public function address() : ?string
+    public function address(): ?string
     {
         return $this->address;
     }
 
-    public function zip() : ?string
+    public function zip(): ?string
     {
         return $this->zip;
     }
 
-    public function phone() : string
+    public function phone(): string
     {
         return $this->phone;
     }
 
-    public function fullName() : string
+    public function fullName(): string
     {
         return $this->fullName;
     }

@@ -11,6 +11,7 @@ use App\Domain\Model\Transaction\Exceptions\TransactionPersistenceFailed;
 use App\Domain\Model\User\Exceptions\UserPersistenceFailed;
 use App\Domain\Model\User\Interfaces\UserRepository;
 use App\Domain\Model\User\User;
+
 use function assert;
 
 final class UserPersister implements DataPersisterInterface
@@ -27,23 +28,19 @@ final class UserPersister implements DataPersisterInterface
         $this->transactionalExecutor = $transactionalExecutor;
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function supports($data) : bool
+    /** @param mixed $data */
+    public function supports($data): bool
     {
         return $data instanceof User;
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function persist($data) : User
+    /** @param mixed $data */
+    public function persist($data): User
     {
         assert($data instanceof User);
 
         try {
-            $this->transactionalExecutor->execute(function () use ($data) : void {
+            $this->transactionalExecutor->execute(function () use ($data): void {
                 $this->userRepository->save($data);
             });
         } catch (UserPersistenceFailed | TransactionPersistenceFailed $exception) {
@@ -53,10 +50,8 @@ final class UserPersister implements DataPersisterInterface
         return $data;
     }
 
-    /**
-     * @param mixed $data
-     */
-    public function remove($data) : void
+    /** @param mixed $data */
+    public function remove($data): void
     {
         assert($data instanceof User);
 

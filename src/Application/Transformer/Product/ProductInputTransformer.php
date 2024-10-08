@@ -11,6 +11,7 @@ use App\Application\Dto\Product\ProductInput;
 use App\Domain\Model\Product\Product;
 use App\Domain\Model\Product\ProductId;
 use Ramsey\Uuid\Uuid;
+
 use function assert;
 
 final class ProductInputTransformer implements DataTransformerInterface
@@ -30,7 +31,7 @@ final class ProductInputTransformer implements DataTransformerInterface
      * @param string       $to
      * @param array<mixed> $context
      */
-    public function transform($object, string $to, array $context = []) : Product
+    public function transform($object, string $to, array $context = []): Product
     {
         assert($object instanceof ProductInput);
 
@@ -58,7 +59,7 @@ final class ProductInputTransformer implements DataTransformerInterface
      * @param string              $to
      * @param array<mixed>        $context
      */
-    public function supportsTransformation($data, string $to, array $context = []) : bool
+    public function supportsTransformation($data, string $to, array $context = []): bool
     {
         if ($data instanceof Product) {
             return false;

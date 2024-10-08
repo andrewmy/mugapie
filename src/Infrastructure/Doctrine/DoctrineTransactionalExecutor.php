@@ -16,7 +16,7 @@ class DoctrineTransactionalExecutor implements TransactionalExecutor
         $this->entityManager = $entityManager;
     }
 
-    public function execute(callable $operation) : void
+    public function execute(callable $operation): void
     {
         $this->entityManager->wrapInTransaction($operation);
     }

@@ -45,7 +45,7 @@ class OrderItem implements ProductUnits
         OrderItemId $id,
         Order $order,
         CreateOrderItem $data
-    ) : self {
+    ): self {
         $obj     = new self();
         $obj->id = $id->value();
         $order->addItem($obj);
@@ -59,57 +59,57 @@ class OrderItem implements ProductUnits
         return $obj;
     }
 
-    public function id() : OrderItemId
+    public function id(): OrderItemId
     {
         return new OrderItemId($this->id);
     }
 
-    public function incrementalId() : ?int
+    public function incrementalId(): ?int
     {
         return $this->incrementalId;
     }
 
-    public function order() : ?Order
+    public function order(): ?Order
     {
         return $this->order;
     }
 
-    public function linkOrder(?Order $order) : void
+    public function linkOrder(?Order $order): void
     {
         $this->order = $order;
     }
 
-    public function createdAt() : DateTimeInterface
+    public function createdAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function product() : Product
+    public function product(): Product
     {
         return $this->product;
     }
 
-    public function productType() : ProductType
+    public function productType(): ProductType
     {
         return $this->productType;
     }
 
-    public function title() : string
+    public function title(): string
     {
         return $this->title;
     }
 
-    public function sku() : string
+    public function sku(): string
     {
         return $this->sku;
     }
 
-    public function pricePerUnit() : Money
+    public function pricePerUnit(): Money
     {
         return $this->pricePerUnit;
     }
 
-    public function units() : int
+    public function units(): int
     {
         return $this->units;
     }

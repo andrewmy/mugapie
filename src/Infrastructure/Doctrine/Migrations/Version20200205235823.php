@@ -7,21 +7,19 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * @codeCoverageIgnore
- */
+/** @codeCoverageIgnore */
 final class Version20200205235823 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'Create initial schema';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->abortIf(
             $this->connection->getDatabasePlatform()->getName() !== 'mysql',
-            'Migration can only be executed safely on \'mysql\'.'
+            'Migration can only be executed safely on \'mysql\'.',
         );
 
         $this->addSql(
@@ -40,7 +38,7 @@ final class Version20200205235823 extends AbstractMigration
             . 'INDEX IDX_62809DB08D9F6D38 (order_id), '
             . 'UNIQUE INDEX UNIQ_62809DB0FBD6FF99 (incremental_id), '
             . 'PRIMARY KEY(id)) '
-            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' '
+            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ',
         );
 
         $this->addSql(
@@ -64,7 +62,7 @@ final class Version20200205235823 extends AbstractMigration
             . 'status VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, '
             . 'INDEX IDX_E52FFDEEA76ED395 (user_id), '
             . 'UNIQUE INDEX UNIQ_E52FFDEEFBD6FF99 (incremental_id), PRIMARY KEY(id)) '
-            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' '
+            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ',
         );
 
         $this->addSql(
@@ -82,7 +80,7 @@ final class Version20200205235823 extends AbstractMigration
             . 'INDEX IDX_B3BA5A5AA76ED395 (user_id), '
             . 'UNIQUE INDEX UNIQ_B3BA5A5AF9038C4 (sku), '
             . 'UNIQUE INDEX UNIQ_B3BA5A5AFBD6FF99 (incremental_id), PRIMARY KEY(id)) '
-            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' '
+            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ',
         );
 
         $this->addSql(
@@ -97,7 +95,7 @@ final class Version20200205235823 extends AbstractMigration
             . 'INDEX IDX_EAA81A4C8D9F6D38 (order_id), '
             . 'INDEX IDX_EAA81A4CA76ED395 (user_id), '
             . 'UNIQUE INDEX UNIQ_EAA81A4CFBD6FF99 (incremental_id), PRIMARY KEY(id)) '
-            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' '
+            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ',
         );
 
         $this->addSql(
@@ -109,15 +107,15 @@ final class Version20200205235823 extends AbstractMigration
             . 'balance_amount VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, '
             . 'balance_currency_code CHAR(3) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, '
             . 'PRIMARY KEY(id)) '
-            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' '
+            . 'DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ',
         );
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $this->abortIf(
             $this->connection->getDatabasePlatform()->getName() !== 'mysql',
-            'Migration can only be executed safely on \'mysql\'.'
+            'Migration can only be executed safely on \'mysql\'.',
         );
 
         $this->addSql('DROP TABLE order_items');

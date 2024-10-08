@@ -13,7 +13,7 @@ final class UpdateUser
         $this->nickname = $nickname;
     }
 
-    public function nickname() : ?string
+    public function nickname(): ?string
     {
         return $this->nickname;
     }

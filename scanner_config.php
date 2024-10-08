@@ -17,7 +17,9 @@ return [
     'scanDirectories'  => $scanDirectories,
 
     'skipPackages' => [
+        'doctrine/annotations',
         'symfony/asset',
+        'symfony/config',
         'symfony/flex',
         'symfony/intl',
         'symfony/yaml',

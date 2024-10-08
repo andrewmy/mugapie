@@ -9,13 +9,9 @@ use App\Domain\Model\Product\Product;
 
 interface ProductRepository
 {
-    /**
-     * @throws ProductPersistenceFailed
-     */
-    public function save(Product $product) : void;
+    /** @throws ProductPersistenceFailed */
+    public function save(Product $product): void;
 
-    /**
-     * @throws ProductPersistenceFailed
-     */
-    public function delete(Product $product) : void;
+    /** @throws ProductPersistenceFailed */
+    public function delete(Product $product): void;
 }

@@ -68,7 +68,7 @@ class Order implements RecordsEvents
         OrderId $id,
         CreateOrder $data,
         Money $orderCost
-    ) : self {
+    ): self {
         $obj     = new self();
         $obj->id = $id->value();
         $data->user()->addOrder($obj);
@@ -79,7 +79,7 @@ class Order implements RecordsEvents
         return $obj;
     }
 
-    public function update(UpdateOrder $data, Money $orderCost) : void
+    public function update(UpdateOrder $data, Money $orderCost): void
     {
         $this->shippingType    = $data->shippingType();
         $this->shippingAddress = $data->shippingAddress();
@@ -91,59 +91,59 @@ class Order implements RecordsEvents
         $this->updatedAt = Carbon::now();
     }
 
-    public function id() : OrderId
+    public function id(): OrderId
     {
         return new OrderId($this->id);
     }
 
-    public function incrementalId() : ?int
+    public function incrementalId(): ?int
     {
         return $this->incrementalId;
     }
 
-    public function user() : User
+    public function user(): User
     {
         return $this->user;
     }
 
-    public function linkUser(User $user) : void
+    public function linkUser(User $user): void
     {
         $this->user = $user;
 
         $this->updatedAt = Carbon::now();
     }
 
-    public function createdAt() : DateTimeInterface
+    public function createdAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function updatedAt() : DateTimeInterface
+    public function updatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function shippingType() : ShippingType
+    public function shippingType(): ShippingType
     {
         return $this->shippingType;
     }
 
-    public function shippingAddress() : ShippingAddress
+    public function shippingAddress(): ShippingAddress
     {
         return $this->shippingAddress;
     }
 
-    public function status() : OrderStatus
+    public function status(): OrderStatus
     {
         return $this->status;
     }
 
-    public function isEditable() : bool
+    public function isEditable(): bool
     {
         return $this->status->value() !== OrderStatus::PRODUCTION;
     }
 
-    public function sendToProduction() : void
+    public function sendToProduction(): void
     {
         if ($this->status->value() === OrderStatus::PRODUCTION) {
             return;
@@ -154,27 +154,25 @@ class Order implements RecordsEvents
         $this->recordThat(new OrderSentToProduction($this));
     }
 
-    public function orderCost() : Money
+    public function orderCost(): Money
     {
         return $this->orderCost;
     }
 
-    public function updateOrderCost(Money $orderCost) : void
+    public function updateOrderCost(Money $orderCost): void
     {
         $this->orderCost = $orderCost;
 
         $this->updatedAt = Carbon::now();
     }
 
-    /**
-     * @return Collection<int, OrderItem>
-     */
-    public function items() : Collection
+    /** @return Collection<int, OrderItem> */
+    public function items(): Collection
     {
         return $this->items;
     }
 
-    public function addItem(OrderItem $item) : void
+    public function addItem(OrderItem $item): void
     {
         if ($this->items()->contains($item)) {
             return;
@@ -186,7 +184,7 @@ class Order implements RecordsEvents
         $this->updatedAt = Carbon::now();
     }
 
-    public function removeItem(OrderItem $item) : void
+    public function removeItem(OrderItem $item): void
     {
         $this->items()->removeElement($item);
         $item->linkOrder(null);

@@ -20,7 +20,7 @@ use Ramsey\Uuid\Uuid;
 
 final class OrderInputTest extends TestCase
 {
-    public function testDomestic() : void
+    public function testDomestic(): void
     {
         $input               = new OrderInput();
         $input->shippingType = 'standard';

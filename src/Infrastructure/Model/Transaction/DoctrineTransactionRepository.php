@@ -20,7 +20,7 @@ final class DoctrineTransactionRepository implements TransactionRepository
         $this->entityManager = $entityManager;
     }
 
-    public function save(Transaction $transaction) : void
+    public function save(Transaction $transaction): void
     {
         try {
             $this->entityManager->persist($transaction);

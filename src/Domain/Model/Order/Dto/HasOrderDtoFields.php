@@ -19,25 +19,23 @@ trait HasOrderDtoFields
     /** @var Collection<int, CreateOrderItem> */
     private Collection $items;
 
-    public function shippingType() : ShippingType
+    public function shippingType(): ShippingType
     {
         return $this->shippingType;
     }
 
-    public function shippingAddress() : ShippingAddress
+    public function shippingAddress(): ShippingAddress
     {
         return $this->shippingAddress;
     }
 
-    /**
-     * @return Collection<int, CreateOrderItem>
-     */
-    public function items() : Collection
+    /** @return Collection<int, CreateOrderItem> */
+    public function items(): Collection
     {
         return $this->items;
     }
 
-    public function addItem(CreateOrderItem $item) : void
+    public function addItem(CreateOrderItem $item): void
     {
         if ($this->items()->contains($item)) {
             return;
@@ -59,10 +57,10 @@ trait HasOrderDtoFields
         );
     }
 
-    private function itemWithProduct(Product $product) : ?CreateOrderItem
+    private function itemWithProduct(Product $product): ?CreateOrderItem
     {
         $item = $this->items()->filter(
-            static function (CreateOrderItem $item) use ($product) : bool {
+            static function (CreateOrderItem $item) use ($product): bool {
                 return $item->product() === $product;
             },
         )->first();

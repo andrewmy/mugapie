@@ -8,7 +8,7 @@ use App\Tests\Integration\IntegrationTestCase;
 
 final class CreateUserTest extends IntegrationTestCase
 {
-    public function testCreatesWithBalance() : void
+    public function testCreatesWithBalance(): void
     {
         $this->request('POST', 'users', ['nickname' => 'abc']);
 

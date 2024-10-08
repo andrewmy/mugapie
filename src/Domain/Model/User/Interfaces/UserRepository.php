@@ -9,13 +9,9 @@ use App\Domain\Model\User\User;
 
 interface UserRepository
 {
-    /**
-     * @throws UserPersistenceFailed
-     */
-    public function save(User $user) : void;
+    /** @throws UserPersistenceFailed */
+    public function save(User $user): void;
 
-    /**
-     * @throws UserPersistenceFailed
-     */
-    public function delete(User $user) : void;
+    /** @throws UserPersistenceFailed */
+    public function delete(User $user): void;
 }

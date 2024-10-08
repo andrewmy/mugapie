@@ -16,7 +16,7 @@ final class SendToProductionController
         $this->handler = $handler;
     }
 
-    public function __invoke(Order $data) : Order
+    public function __invoke(Order $data): Order
     {
         return $this->handler->handle($data);
     }
